@@ -13,8 +13,7 @@ public class Node {
     private Node back;
     private Project project;//For Queues
     private Node queueLast;//For Queues
-    private Node left, right;//For trees
-    private Task task;//For trees
+    
    
     public Node(User user) {
         this.user = user;
@@ -22,10 +21,6 @@ public class Node {
 
     public Node(Project project) {
         this.project = project;
-    }
-    
-    public Node(Task task){
-        this.task = task;
     }
 
     public User getUser() {
@@ -68,34 +63,9 @@ public class Node {
         this.queueLast = queueLast;
     }
 
-    public Task getTask() {
-        return task;
-    }
-
-    public void setTask(Task task) {
-        this.task = task;
-    }
-
-    public Node getLeft() {
-        return left;
-    }
-
-    public void setLeft(Node left) {
-        this.left = left;
-    }
-
-    public Node getRight() {
-        return right;
-    }
-
-    public void setRight(Node right) {
-        this.right = right;
-    }
-
     @Override
     public String toString() {
         return "User: " + user;
     }
-    
     
 }

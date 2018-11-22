@@ -1,6 +1,7 @@
 package Package.DataStructures;
 
 import Package.DataModels.User;
+import javax.swing.JOptionPane;
 
 public class UserList {
 
@@ -17,7 +18,7 @@ public class UserList {
                     last.setNext(new Node(user));
                     last = last.getNext();
                 } else {
-                    System.out.println("Username already exists");
+                    JOptionPane.showMessageDialog(null, "That username already exists");
                 }
             } else {
                 boolean getsIn = true;
@@ -40,7 +41,7 @@ public class UserList {
                     temp.setBack(last);
                     last = temp;
                 }else{
-                    System.out.println("Username already exists");
+                    JOptionPane.showMessageDialog(null, "That username already exists");
                 }
                 
             }
@@ -64,12 +65,13 @@ public class UserList {
                         aux.setNext(aux.getNext().getNext());
                         aux.getNext().setBack(aux);
                         removed = true;
+                        break;
                     } else {
                         aux = aux.getNext();
                     }
                 }
             }
-            System.out.println(removed ? "User removed" : "User did not exist");
+            JOptionPane.showMessageDialog(null, removed ? "User removed" : "User did not exist");
         } else {
             System.out.println("There's no data");
         }
@@ -91,9 +93,9 @@ public class UserList {
                     }
                 }
             }
-            System.out.println(exists ? "Welcome" : "User does not exist");
+            JOptionPane.showMessageDialog(null, exists ? "Welcome" : "User does not exist");
         } else {
-            System.out.println("Empty");
+            JOptionPane.showMessageDialog(null, "There are no users");
         }
     }
 
@@ -109,7 +111,7 @@ public class UserList {
                 aux = aux.getNext();
             }
         } else {
-            System.out.println("vacia");
+            JOptionPane.showMessageDialog(null, "There are no users");
         }
         return lista;
     }

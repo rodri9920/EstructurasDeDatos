@@ -1,7 +1,7 @@
 package Package.DataStructures;
 
 import Package.DataModels.Project;
-import Package.DataStructures.Node;
+import javax.swing.JOptionPane;
 
 public class Queue {
     private Node first, last;
@@ -23,9 +23,9 @@ public class Queue {
     }
 
 
-    public void removeByName(String nombre) {
+    public void removeByName(String name) {
         if (first != null) {
-            if (first.getProject().getName().equals(nombre)) {
+            if (first.getProject().getName().equals(name)) {
                 if(first.getQueueLast() != null){
                     first = first.getQueueLast();
                 }else{
@@ -34,7 +34,7 @@ public class Queue {
             } else {
                 Node aux = first;
                 while (aux.getQueueLast() != null) {
-                    if (aux.getQueueLast().getProject().getName().equals(nombre)) {
+                    if (aux.getQueueLast().getProject().getName().equals(name)) {
                         aux.setQueueLast(aux.getQueueLast().getQueueLast());
                     }else{
                         aux = aux.getQueueLast();
@@ -43,7 +43,7 @@ public class Queue {
             }
 
         } else {
-            System.out.println("Vacia");
+            JOptionPane.showMessageDialog(null, "This user has no projects");
         }
     }
 
@@ -62,7 +62,7 @@ public class Queue {
                 }
             }
         } else {
-            System.out.println("Empty");
+            JOptionPane.showMessageDialog(null, "This user has no projects");
         }
     }
 
@@ -81,7 +81,7 @@ public class Queue {
                 }
             }
         } else {
-            System.out.println("Empty");
+            JOptionPane.showMessageDialog(null, "This user has no projects");
         }
     }
 

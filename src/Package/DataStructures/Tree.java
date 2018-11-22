@@ -6,27 +6,27 @@ import Package.DataModels.Task;
 
 public class Tree {
     
-    Node root;
+    NodeTree root;
     
     public void add(Task task){
-        if(root != null){
-            root = new Node(task);
+        if(root == null){
+            root = new NodeTree(task);
         }else{
-            
+            addRec(task, root);
         }
     }
     
-    private void addRec(Task task, Node n){
+    private void addRec(Task task, NodeTree n){
         if(task.getPriority() <= n.getTask().getPriority()){
-            if(n.getLeft() != null){
-                n.setLeft(new Node(task));
+            if(n.getLeft() == null){
+                n.setLeft(new NodeTree(task));
             }else{
                 addRec(task, n.getLeft());
             }
         }
         if(task.getPriority() > n.getTask().getPriority()){
-            if(n.getRight() != null){
-                n.setRight(new Node(task));
+            if(n.getRight() == null){
+                n.setRight(new NodeTree(task));
             }else{
                 addRec(task, n.getRight());
             }
@@ -39,11 +39,11 @@ public class Tree {
         }
     }
     
-    private void inOrderRec(Node n){
+    private void inOrderRec(NodeTree n){
         if (n != null) {
             inOrderRec(n.getLeft());
             System.out.print(n);
-            System.out.println(n);
+            System.out.println();
             inOrderRec(n.getRight());
         }
     }
