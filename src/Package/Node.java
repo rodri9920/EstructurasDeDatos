@@ -7,15 +7,15 @@ public class Node {
     private User user;
     private Node next;
     private Node back;
-    private Proyecto project;//para colas
+    private Project project;//para colas
     private Node queueLast;//para colas
    
     public Node(User user) {
         this.user = user;
     }
 
-    public Node(Proyecto proyecto) {
-        this.project = proyecto;
+    public Node(Project project) {
+        this.project = project;
     }
 
     public User getUser() {
@@ -42,20 +42,20 @@ public class Node {
         this.back = back;
     }
 
-    public Proyecto getProject() {
+    public Project getProject() {
         return project;
     }
 
-    public void setProject(Proyecto proyecto) {
-        this.project = proyecto;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public Node getQueueLast() {
         return queueLast;
     }
 
-    public void setQueueLast(Node atras) {
-        this.queueLast = atras;
+    public void setQueueLast(Node queueLast) {
+        this.queueLast = queueLast;
     }        
 
     @Override

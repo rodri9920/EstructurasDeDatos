@@ -1,20 +1,19 @@
 package Package;
 
 public class Queue {
-
-    private Nodo first, last;
+    private Node first, last;
     private Project dato;
 
-    public void enqueue(Project tarea) {
+    public void enqueue(Project project) {
         if (first == null) {
-            first = new Node(tarea);
+            first = new Node(project);
             last = first;
         } else {
             if (first == last) {
-                first.setQueueLast(new Node(tarea));
+                first.setQueueLast(new Node(project));
                 last = first.getQueueLast();
             } else {
-                last.setQueueLast(new Node(tarea));
+                last.setQueueLast(new Node(project));
                 last = last.getQueueLast();
             }
         }
@@ -23,7 +22,7 @@ public class Queue {
 
     public void removeByName(String nombre) {
         if (first != null) {
-            if (first.getProject().getNombre().equals(nombre)) {
+            if (first.getProject().getName().equals(nombre)) {
                 if(first.getQueueLast() != null){
                     first = first.getQueueLast();
                 }else{
@@ -32,7 +31,7 @@ public class Queue {
             } else {
                 Node aux = first;
                 while (aux.getQueueLast() != null) {
-                    if (aux.getQueueLast().getProject().getNombre().equals(nombre)) {
+                    if (aux.getQueueLast().getProject().getName().equals(nombre)) {
                         aux.setQueueLast(aux.getQueueLast().getQueueLast());
                     }else{
                         aux = aux.getQueueLast();
@@ -50,7 +49,7 @@ public class Queue {
         Node temp = new Node(dato);
         if (aux != null) {
             while (aux.getQueueLast() != null) {
-                if (aux.getProject().getPrioridad() > aux.getQueueLast().getProject().getPrioridad()) {
+                if (aux.getProject().getPriority()> aux.getQueueLast().getProject().getPriority()) {
                     temp.setProject(aux.getProject());
                     aux.setProject(aux.getQueueLast().getProject());
                     aux.getQueueLast().setProject(temp.getProject());
@@ -69,7 +68,7 @@ public class Queue {
         Node temp = new Node(dato);
         if (aux != null) {
             while (aux.getQueueLast() != null) {
-                if (aux.getProject().getMes() > aux.getQueueLast().getProject().getMes()) {
+                if (aux.getProject().getMonth()> aux.getQueueLast().getProject().getMonth()) {
                     temp.setProject(aux.getProject());
                     aux.setProject(aux.getQueueLast().getProject());
                     aux.getQueueLast().setProject(temp.getProject());
@@ -85,13 +84,13 @@ public class Queue {
 
     @Override
     public String toString() {
-        String cola = "";
+        String queue = "";
         Node aux = first;
         while (aux != null) {
-            cola += aux.getProject() + "\n";
+            queue += aux.getProject() + "\n";
             aux = aux.getQueueLast();
         }
-        return cola;
+        return queue;
     }
 
 }

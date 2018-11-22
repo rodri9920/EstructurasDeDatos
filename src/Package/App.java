@@ -14,18 +14,18 @@ public class App {
         list.add(new User("rodri9920", "***"));
         System.out.println(list);
         list.signIn("rodri9920", "4");
-        Queue cola = new Queue();
-        cola.enqueue(new Project("Proyecto", 2, 5));
-        cola.enqueue(new Project("Tarea", 3, 4));
-        cola.enqueue(new Project("Taller", 7, 7));
-        cola.enqueue(new Project("Presentacion", 4, 1));
-        cola.enqueue(new Project("Caso", 1, 5));
-        cola.orderByPriority();
-        System.out.println(cola);
-        cola.orderByDate();
-        System.out.println(cola);
-        cola.removeByName("Tarea");
-        System.out.println(cola);
+        Queue queue = new Queue();
+        queue.enqueue(new Project("Proyecto", 2, 5));
+        queue.enqueue(new Project("Tarea", 3, 4));
+        queue.enqueue(new Project("Taller", 7, 7));
+        queue.enqueue(new Project("Presentacion", 4, 1));
+        queue.enqueue(new Project("Caso", 1, 5));
+        queue.orderByPriority();
+        System.out.println(queue);
+        queue.orderByDate();
+        System.out.println(queue);
+        queue.removeByName("Tarea");
+        System.out.println(queue);
         
     }
     
