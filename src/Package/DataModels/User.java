@@ -1,6 +1,7 @@
 
-package Package.DataStructures;
+package Package.DataModels;
 
+import Package.DataStructures.Queue;
 import Package.DataStructures.Queue;
 
 

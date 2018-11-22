@@ -1,8 +1,8 @@
 
 package Package;
 
-import Package.DataStructures.User;
-import Package.DataStructures.Project;
+import Package.DataModels.User;
+import Package.DataModels.Project;
 import Package.DataStructures.UserList;
 import Package.DataStructures.Queue;
 

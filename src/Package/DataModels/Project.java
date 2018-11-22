@@ -1,5 +1,5 @@
 
-package Package.DataStructures;
+package Package.DataModels;
 
 
 public class Project {

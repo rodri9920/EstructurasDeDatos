@@ -1,5 +1,6 @@
 package Package.DataStructures;
 
+import Package.DataModels.Project;
 import Package.DataStructures.Node;
 
 public class Queue {

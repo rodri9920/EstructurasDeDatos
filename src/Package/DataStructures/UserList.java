@@ -1,5 +1,6 @@
 package Package.DataStructures;
 
+import Package.DataModels.User;
 import Package.DataStructures.Node;
 
 public class UserList {

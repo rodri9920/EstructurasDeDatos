@@ -1,6 +1,9 @@
 
 package Package.DataStructures;
 
+import Package.DataModels.Project;
+import Package.DataModels.User;
+
 
 public class Node {
     
