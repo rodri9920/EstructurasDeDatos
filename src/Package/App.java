@@ -7,11 +7,11 @@ public class App {
 
     public static void main(String[] args) {
         UserList list = new UserList();
-        list.add(new Usuario("rodri9920", "5"));
-        list.add(new Usuario("pepe2000", "*****"));
-        list.add(new Usuario("juanito1408", "Hernandez"));
-        list.add(new Usuario("anamaria4578", "Zeledon"));
-        list.add(new Usuario("rodri9920", "***"));
+        list.add(new User("rodri9920", "5"));
+        list.add(new User("pepe2000", "*****"));
+        list.add(new User("juanito1408", "Hernandez"));
+        list.add(new User("anamaria4578", "Zeledon"));
+        list.add(new User("rodri9920", "***"));
         System.out.println(list);
         list.signIn("rodri9920", "4");
         Queue cola = new Queue();

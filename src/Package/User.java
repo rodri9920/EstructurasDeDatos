@@ -2,15 +2,15 @@
 package Package;
 
 
-public class Usuario {
+public class User {
     
     private String username, password ;
-    private Queue tareas;
+    private Queue tasks;
 
-    public Usuario(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.tareas = new Queue();
+        this.tasks = new Queue();
     }
 
     public String getUsername() {
@@ -29,12 +29,12 @@ public class Usuario {
         this.password = password;
     }
 
-    public Queue getTareas() {
-        return tareas;
+    public Queue getTasks() {
+        return tasks;
     }
 
-    public void setTareas(Queue tareas) {
-        this.tareas = tareas;
+    public void setTasks(Queue tareas) {
+        this.tasks = tareas;
     }
 
     @Override

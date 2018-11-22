@@ -2,17 +2,17 @@ package Package;
 
 public class UserList {
 
-    private Nodo head;
-    private Nodo last;
+    private Node head;
+    private Node last;
 
-    public void add(Usuario user) {
+    public void add(User user) {
         if (head == null) {
-            head = new Nodo(user);
+            head = new Node(user);
             last = head;
         } else {
             if (last == head) {
                 if (!head.getUser().getUsername().equals(user.getUsername())) {
-                    last.setNext(new Nodo(user));
+                    last.setNext(new Node(user));
                     last = last.getNext();
                 } else {
                     System.out.println("Username already exists");
@@ -22,7 +22,7 @@ public class UserList {
                 if (head.getUser().getUsername().equals(user.getUsername())) {
                     getsIn = false;
                 } else {
-                    Nodo aux = head.getNext();
+                    Node aux = head.getNext();
                     while (aux != head) {
                         if (aux.getUser().getUsername().equals(user.getUsername())) {
                             getsIn = false;
@@ -33,7 +33,7 @@ public class UserList {
                     }
                 }
                 if(getsIn){
-                    Nodo temp = new Nodo(user);
+                    Node temp = new Node(user);
                     last.setNext(temp);
                     temp.setBack(last);
                     last = temp;
@@ -56,7 +56,7 @@ public class UserList {
                 last.setNext(head);
                 removed = true;
             } else {
-                Nodo aux = head;
+                Node aux = head;
                 while (aux.getNext() != head) {
                     if (aux.getNext().getUser().getUsername().equals(username) && aux.getNext().getUser().getPassword().equals(password)) {
                         aux.setNext(aux.getNext().getNext());
@@ -79,7 +79,7 @@ public class UserList {
             if (head.getUser().getUsername().equals(username) && head.getUser().getPassword().equals(password)) {
                 exists = true;
             } else {
-                Nodo aux = head.getNext();
+                Node aux = head.getNext();
                 while (aux != head) {
                     if (aux.getUser().getUsername().equals(username) && aux.getUser().getPassword().equals(password)) {
                         exists = true;
@@ -98,7 +98,7 @@ public class UserList {
     @Override
     public String toString() {
         String lista = "";
-        Nodo aux = head;
+        Node aux = head;
         if (head != null) {
             lista += aux + "\n";
             aux = aux.getNext();
