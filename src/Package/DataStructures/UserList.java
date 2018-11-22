@@ -1,4 +1,6 @@
-package Package;
+package Package.DataStructures;
+
+import Package.DataStructures.Node;
 
 public class UserList {
 

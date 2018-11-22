@@ -1,5 +1,7 @@
 
-package Package;
+package Package.DataStructures;
+
+import Package.DataStructures.Queue;
 
 
 public class User {

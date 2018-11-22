@@ -1,5 +1,5 @@
 
-package Package;
+package Package.DataStructures;
 
 
 public class Node {
@@ -7,8 +7,8 @@ public class Node {
     private User user;
     private Node next;
     private Node back;
-    private Project project;//para colas
-    private Node queueLast;//para colas
+    private Project project;//For Queues
+    private Node queueLast;//For Queues
    
     public Node(User user) {
         this.user = user;

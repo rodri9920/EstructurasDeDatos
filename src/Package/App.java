@@ -1,6 +1,11 @@
 
 package Package;
 
+import Package.DataStructures.User;
+import Package.DataStructures.Project;
+import Package.DataStructures.UserList;
+import Package.DataStructures.Queue;
+
 
 public class App {
 

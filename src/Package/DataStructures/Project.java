@@ -1,5 +1,5 @@
 
-package Package;
+package Package.DataStructures;
 
 
 public class Project {
