@@ -15,11 +15,11 @@ public class App {
         System.out.println(list);
         list.signIn("rodri9920", "4");
         Queue cola = new Queue();
-        cola.enqueue(new Proyecto("Proyecto", 2, 5));
-        cola.enqueue(new Proyecto("Tarea", 3, 4));
-        cola.enqueue(new Proyecto("Taller", 7, 7));
-        cola.enqueue(new Proyecto("Presentacion", 4, 1));
-        cola.enqueue(new Proyecto("Caso", 1, 5));
+        cola.enqueue(new Project("Proyecto", 2, 5));
+        cola.enqueue(new Project("Tarea", 3, 4));
+        cola.enqueue(new Project("Taller", 7, 7));
+        cola.enqueue(new Project("Presentacion", 4, 1));
+        cola.enqueue(new Project("Caso", 1, 5));
         cola.orderByPriority();
         System.out.println(cola);
         cola.orderByDate();

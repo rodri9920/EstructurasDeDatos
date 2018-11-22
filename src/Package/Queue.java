@@ -2,10 +2,10 @@ package Package;
 
 public class Queue {
 
-    private Node first, last;
-    private Proyecto dato;
+    private Nodo first, last;
+    private Project dato;
 
-    public void enqueue(Proyecto tarea) {
+    public void enqueue(Project tarea) {
         if (first == null) {
             first = new Node(tarea);
             last = first;
