@@ -1,16 +1,20 @@
 
 package Package.DataModels;
 
+import Package.DataStructures.Tree;
+
 
 public class Project {
     
     private String name;
     private int priority, month;
+    private Tree tree;
 
     public Project(String name, int priority, int month) {
         this.name = name;
         this.priority = priority;
         this.month = month;
+        this.tree = new Tree();
     }
     
     public String getName() {
