@@ -7,14 +7,14 @@ public class Nodo {
     private Usuario user;
     private Nodo next;
     private Nodo back;
-    private Proyecto proyecto;//para colas
+    private Project proyecto;//para colas
     private Nodo atras;//para colas
 
     public Nodo(Usuario user) {
         this.user = user;
     }
 
-    public Nodo(Proyecto proyecto) {
+    public Nodo(Project proyecto) {
         this.proyecto = proyecto;
     }
 
@@ -42,11 +42,11 @@ public class Nodo {
         this.back = back;
     }
 
-    public Proyecto getProyecto() {
+    public Project getProyecto() {
         return proyecto;
     }
 
-    public void setProyecto(Proyecto proyecto) {
+    public void setProyecto(Project proyecto) {
         this.proyecto = proyecto;
     }
 

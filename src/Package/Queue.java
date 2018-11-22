@@ -3,9 +3,9 @@ package Package;
 public class Queue {
 
     private Nodo first, last;
-    private Proyecto dato;
+    private Project dato;
 
-    public void enqueue(Proyecto tarea) {
+    public void enqueue(Project tarea) {
         if (first == null) {
             first = new Nodo(tarea);
             last = first;
