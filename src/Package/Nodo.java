@@ -1,5 +1,5 @@
 
-package proyectroestructuras;
+package Package;
 
 
 public class Nodo {

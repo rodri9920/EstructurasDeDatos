@@ -1,16 +1,16 @@
 
-package proyectroestructuras;
+package Package;
 
 
 public class Usuario {
     
     private String username, password ;
-    private ColaProyecto tareas;
+    private Queue tareas;
 
     public Usuario(String username, String password) {
         this.username = username;
         this.password = password;
-        this.tareas = new ColaProyecto();
+        this.tareas = new Queue();
     }
 
     public String getUsername() {
@@ -29,11 +29,11 @@ public class Usuario {
         this.password = password;
     }
 
-    public ColaProyecto getTareas() {
+    public Queue getTareas() {
         return tareas;
     }
 
-    public void setTareas(ColaProyecto tareas) {
+    public void setTareas(Queue tareas) {
         this.tareas = tareas;
     }
 

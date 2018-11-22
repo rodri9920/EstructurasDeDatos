@@ -1,47 +1,36 @@
-package proyectroestructuras;
+package Package;
 
-public class ColaProyecto {
+public class Queue {
 
-    private Nodo frente, ultimo;
+    private Nodo first, last;
     private Proyecto dato;
 
-    public void encola(Proyecto tarea) {
-        if (frente == null) {
-            frente = new Nodo(tarea);
-            ultimo = frente;
+    public void enqueue(Proyecto tarea) {
+        if (first == null) {
+            first = new Nodo(tarea);
+            last = first;
         } else {
-            if (frente == ultimo) {
-                frente.setAtras(new Nodo(tarea));
-                ultimo = frente.getAtras();
+            if (first == last) {
+                first.setAtras(new Nodo(tarea));
+                last = first.getAtras();
             } else {
-                ultimo.setAtras(new Nodo(tarea));
-                ultimo = ultimo.getAtras();
+                last.setAtras(new Nodo(tarea));
+                last = last.getAtras();
             }
         }
     }
-    
-//    public Nodo atiende(){
-//        Nodo aux = frente;
-//        if(aux != null){
-//            frente = frente.getAtras();
-//            aux.setAtras(null);
-//            if(aux == ultimo){
-//                ultimo = null;
-//            }
-//        }
-//        return aux;
-//    }
 
-    public void eliminarProyecto(String nombre) {
-        if (frente != null) {
-            if (frente.getProyecto().getNombre().equals(nombre)) {
-                if(frente.getAtras() != null){
-                    frente = frente.getAtras();
+
+    public void removeByName(String nombre) {
+        if (first != null) {
+            if (first.getProyecto().getNombre().equals(nombre)) {
+                if(first.getAtras() != null){
+                    first = first.getAtras();
                 }else{
-                    frente.setProyecto(null);
+                    first.setProyecto(null);
                 }
             } else {
-                Nodo aux = frente;
+                Nodo aux = first;
                 while (aux.getAtras() != null) {
                     if (aux.getAtras().getProyecto().getNombre().equals(nombre)) {
                         aux.setAtras(aux.getAtras().getAtras());
@@ -56,8 +45,8 @@ public class ColaProyecto {
         }
     }
 
-    public void ordenarPorPrioridad() {
-        Nodo aux = frente;
+    public void orderByPriority() {
+        Nodo aux = first;
         Nodo temp = new Nodo(dato);
         if (aux != null) {
             while (aux.getAtras() != null) {
@@ -65,18 +54,18 @@ public class ColaProyecto {
                     temp.setProyecto(aux.getProyecto());
                     aux.setProyecto(aux.getAtras().getProyecto());
                     aux.getAtras().setProyecto(temp.getProyecto());
-                    aux = frente;
+                    aux = first;
                 } else {
                     aux = aux.getAtras();
                 }
             }
         } else {
-            System.out.println("Vacia");
+            System.out.println("Empty");
         }
     }
 
-    public void ordenarPorFecha() {
-        Nodo aux = frente;
+    public void orderByDate() {
+        Nodo aux = first;
         Nodo temp = new Nodo(dato);
         if (aux != null) {
             while (aux.getAtras() != null) {
@@ -84,20 +73,20 @@ public class ColaProyecto {
                     temp.setProyecto(aux.getProyecto());
                     aux.setProyecto(aux.getAtras().getProyecto());
                     aux.getAtras().setProyecto(temp.getProyecto());
-                    aux = frente;
+                    aux = first;
                 } else {
                     aux = aux.getAtras();
                 }
             }
         } else {
-            System.out.println("Vacia");
+            System.out.println("Empty");
         }
     }
 
     @Override
     public String toString() {
         String cola = "";
-        Nodo aux = frente;
+        Nodo aux = first;
         while (aux != null) {
             cola += aux.getProyecto() + "\n";
             aux = aux.getAtras();
