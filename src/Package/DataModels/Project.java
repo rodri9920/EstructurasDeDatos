@@ -41,6 +41,16 @@ public class Project {
         this.priority = priority;
     }
 
+    public Tree getTree() {
+        return tree;
+    }
+
+    public void setTree(Tree tree) {
+        this.tree = tree;
+    }
+    
+    
+    
     @Override
     public String toString() {
         return name;
