@@ -1,6 +1,6 @@
-package Package.DataStructures;
+package src.DataStructures;
 
-import Package.DataModels.User;
+import src.DataModels.User;
 
 public class UserList {
 

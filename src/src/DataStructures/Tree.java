@@ -1,7 +1,7 @@
 
-package Package.DataStructures;
+package src.DataStructures;
 
-import Package.DataModels.Task;
+import src.DataModels.Task;
 
 
 public class Tree {

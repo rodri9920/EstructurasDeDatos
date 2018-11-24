@@ -1,7 +1,7 @@
-package Package.DataStructures;
+package src.DataStructures;
 
-import Package.DataModels.Project;
-import Package.DataStructures.Node;
+import src.DataModels.Project;
+import src.DataStructures.Node;
 
 public class Queue {
     private Node first, last;
