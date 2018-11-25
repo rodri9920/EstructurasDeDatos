@@ -8,6 +8,8 @@ import src.AppUI.ProjectsUI;
 import src.AppUI.SignInUI;
 import src.AppUI.SignUpUI;
 import src.AppUI.CreateProjectForm;
+import src.DataModels.Project;
+import src.DataModels.User;
 
 public class App extends Application {
 
@@ -15,6 +17,9 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch(args);
+        User user = new User("Pepe", "555");
+        user.getProjects().enqueue(new Project("Jaja", 4, 0, 0, 0));
+        System.out.println(user.getProjects().getProject("Jaj").getName());
     }
 
     @Override

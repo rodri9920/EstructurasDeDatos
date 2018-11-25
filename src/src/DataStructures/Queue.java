@@ -3,11 +3,10 @@ package src.DataStructures;
 
 import javax.swing.JOptionPane;
 import src.DataModels.Project;
-import src.DataStructures.Node;
 
 public class Queue {
 
-    private Node first, last;
+    private Node first, last, data;
     private Project dato;
 
     public void enqueue(Project project) {
@@ -28,6 +27,24 @@ public class Queue {
             JOptionPane.showMessageDialog(null, "Project's pryority has to be from 1 to 4");
         }
         
+    }
+    
+    public Project getProject(String name){
+        if(first != null){
+            Node aux = first;
+            while(aux != null){
+                if(aux.getProject().getName().equals(name)){
+                    return aux.getProject();
+                }else{
+                    aux = aux.getQueueLast();
+                }
+            }
+            JOptionPane.showMessageDialog(null, "This user has no projects");
+        }else{
+            JOptionPane.showMessageDialog(null, "This user has no projects");
+            return null;
+        }
+        return null;
     }
 
     public void removeByName(String name) {

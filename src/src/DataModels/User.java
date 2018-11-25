@@ -2,18 +2,17 @@
 package src.DataModels;
 
 import src.DataStructures.Queue;
-import src.DataStructures.Queue;
 
 
 public class User {
     
     private String username, password ;
-    private Queue tasks;
+    private Queue projects;
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.tasks = new Queue();
+        this.projects = new Queue();
     }
 
     public String getUsername() {
@@ -32,12 +31,12 @@ public class User {
         this.password = password;
     }
 
-    public Queue getTasks() {
-        return tasks;
+    public Queue getProjects() {
+        return projects;
     }
 
-    public void setTasks(Queue tareas) {
-        this.tasks = tareas;
+    public void setProjects(Queue tareas) {
+        this.projects = tareas;
     }
 
     @Override
