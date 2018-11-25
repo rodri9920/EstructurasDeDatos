@@ -9,10 +9,11 @@ public class Stack {
     private Node top;
     private int length = 0;
     
-    public void push(Project project){
+    public boolean push(Project project){
         if(top != null){
             top = new Node(project);
             length++;
+            return true;
         }else{
             boolean getsIn = true;
             Node aux = top;
@@ -32,6 +33,7 @@ public class Stack {
             }else{
                 System.out.println("There is already a project with that name");
             }
+            return getsIn;
             
         }
     }
