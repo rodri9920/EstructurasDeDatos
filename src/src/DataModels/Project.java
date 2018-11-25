@@ -1,22 +1,20 @@
 
 package src.DataModels;
 
-import src.DataStructures.Tree;
+import src.DataStructures.Queue;
 
 
 public class Project {
     
-    private String name;
-    private int priority, month, day, year;
-    private Tree tree;
+    private String name, description;
+    private int priority;
+    private Queue tasks;
 
-    public Project(String name, int priority, int month, int day, int year) {
+    public Project(String name, String description, int priority) {
         this.name = name;
+        this.description = description;
         this.priority = priority;
-        this.month = month;
-        this.day = day;
-        this.year = year;
-        this.tree = new Tree();
+        this.tasks = new Queue();
     }
     
     public String getName() {
@@ -27,13 +25,14 @@ public class Project {
         this.name = name;
     }
 
-    public int getMonth() {
-        return month;
+    public String getDescription() {
+        return description;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
+    public void setDescription(String description) {
+        this.description = description;
     }
+    
 
     public int getPriority() {
         return priority;
@@ -43,31 +42,13 @@ public class Project {
         this.priority = priority;
     }
 
-    public int getDay() {
-        return day;
+    public Queue getTasks() {
+        return tasks;
     }
 
-    public void setDay(int day) {
-        this.day = day;
+    public void setTasks(Queue queue) {
+        this.tasks = queue;
     }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public Tree getTree() {
-        return tree;
-    }
-
-    public void setTree(Tree tree) {
-        this.tree = tree;
-    }
-    
-    
     
     @Override
     public String toString() {

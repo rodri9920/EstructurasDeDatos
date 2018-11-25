@@ -10,21 +10,22 @@ import src.AppUI.SignUpUI;
 import src.DataModels.Project;
 import src.DataModels.User;
 import src.AppUI.CreateProjectUI;
+import src.DataStructures.UserList;
 
 public class App extends Application {
 
     private Stage window;
+    private UserList users;
+    private User signedUser;
 
     public static void main(String[] args) {
         launch(args);
-        User user = new User("Pepe", "555");
-        user.getProjects().enqueue(new Project("Jaja", 4, 0, 0, 0));
-        System.out.println(user.getProjects().getProject("Jaj").getName());
     }
 
     @Override
     public void start(Stage window) {
         this.window = window;
+        users = new UserList();
         window.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("res/icon.png")));
         showSignIn();
     }
@@ -75,14 +76,34 @@ public class App extends Application {
     }        
 
     public void signIn(String username, String password) {
-        showProjects();
+        User user = users.signIn(username, password);
+        if(user != null){
+            ModalUI.alert(window, "Signed in succesfully");
+            signedUser = user;
+            showProjects();
+        }else{
+            ModalUI.alert(window, "That username does not exist");
+        }
     }
 
     public void signUp(String username, String password) {
-        showProjects();
+        User user = new User(username, password);
+        if(users.add(user)){
+            ModalUI.alert(window, "User created succesfully");
+            signedUser = user;
+            showProjects();
+        }else{
+            ModalUI.alert(window, "This user already exists");
+        }     
     }
     
-    public void createProject(String name, int priority, int day, int month, int year){
+    public void createProject(String name, String descripton, int priority){
+        System.out.println("******************************");
+        for(int i=0; i<signedUser.getProjects().getLength(); i++){
+            System.out.println(signedUser.getProjects().getProject(i));
+        }
+        Project project = new Project(name, descripton, priority);
+        signedUser.getProjects().push(project);
         
     }
 }

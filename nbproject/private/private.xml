@@ -5,6 +5,7 @@
         <group>
 <<<<<<< Updated upstream
             <file>file:/C:/Users/rodri/Desktop/U/Tercer%20Cuatri/Estructura%20de%20Datos/ProyectroEstructuras/EstructurasDeDatos/src/src/App.java</file>
+<<<<<<< HEAD
             <file>file:/C:/Users/rodri/Desktop/U/Tercer%20Cuatri/Estructura%20de%20Datos/ProyectroEstructuras/EstructurasDeDatos/src/src/DataStructures/Queue.java</file>
             <file>file:/C:/Users/rodri/Desktop/U/Tercer%20Cuatri/Estructura%20de%20Datos/ProyectroEstructuras/EstructurasDeDatos/src/src/DataStructures/NodeTree.java</file>
             <file>file:/C:/Users/rodri/Desktop/U/Tercer%20Cuatri/Estructura%20de%20Datos/ProyectroEstructuras/EstructurasDeDatos/src/src/DataStructures/Tree.java</file>
@@ -19,6 +20,9 @@
             <file>file:/home/zoe/Repositories/EstructurasDeDatos/src/src/DataStructures/Tree.java</file>
             <file>file:/home/zoe/Repositories/EstructurasDeDatos/src/src/App.java</file>
 >>>>>>> Stashed changes
+=======
+            <file>file:/C:/Users/rodri/Desktop/U/Tercer%20Cuatri/Estructura%20de%20Datos/ProyectroEstructuras/EstructurasDeDatos/src/src/DataStructures/Stack.java</file>
+>>>>>>> master
         </group>
     </open-files>
 </project-private>

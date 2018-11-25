@@ -140,6 +140,6 @@ public class CreateProjectUI {
     }
     
     public boolean validateForm(){
-        return false;
+        return true;
     }
 }
