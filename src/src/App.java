@@ -29,7 +29,7 @@ public class App extends Application {
         signInWindow.getCreateAnAccount().setOnMouseClicked(e -> showSignUp());
         signInWindow.getSignInButton().setOnAction(e -> {
             if (signInWindow.validateForm()) {
-                signIn(signInWindow.getUserNameField().getText(), signInWindow.getPasswordField().getText());
+                signIn(signInWindow.getUserNameField(), signInWindow.getPasswordField());
             } else {
                 ModalUI.alert(window, "Please fill the fields!");
             }
@@ -42,7 +42,7 @@ public class App extends Application {
         signUpWindow.getSignInLink().setOnMouseClicked(e -> showSignIn());
         signUpWindow.getSignUpButton().setOnAction(e -> {
             if (signUpWindow.validateForm()) {
-                signUp(signUpWindow.getUserNameField().getText(), signUpWindow.getPasswordField().getText());
+                signUp(signUpWindow.getUserNameField(), signUpWindow.getPasswordField());
             } else {
                 ModalUI.alert(window, "Please fill the fields!");
             }
@@ -59,11 +59,11 @@ public class App extends Application {
     public void showCreateNewProjectForm(){
         CreateProjectForm projectForm = new CreateProjectForm(window);
         projectForm.getCreateProjectButton().setOnAction(e -> {
-            if(!projectForm.getProjectNameField().getText().isEmpty()){                
-                createProject(projectForm.getProjectNameField().getText());
+            if(projectForm.validateForm()){                
+                createProject(projectForm.getProjectNameField(), projectForm.getPriorityField(),  projectForm.getProjectDateField().getDayOfMonth(),  projectForm.getProjectDateField().getMonthValue(), projectForm.getProjectDateField().getYear());
                 projectForm.getModalWindow().close();
             }else{
-                ModalUI.alert(projectForm.getModalWindow(), "Please insert a Project name");
+                ModalUI.alert(projectForm.getModalWindow(), "Please fill all the information");
             }
         });
         projectForm.show();
@@ -77,7 +77,7 @@ public class App extends Application {
         showProjects();
     }
     
-    public void createProject(String name){
+    public void createProject(String name, int priority, int day, int month, int year){
         
     }
 }

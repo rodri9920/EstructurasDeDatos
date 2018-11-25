@@ -107,12 +107,12 @@ public class SignUpUI{
         window.show();
     }
 
-    public TextField getUserNameField() {
-        return userNameField;
+    public String getUserNameField() {
+        return userNameField.getText();
     }
 
-    public PasswordField getPasswordField() {
-        return passwordField;
+    public String getPasswordField() {
+        return passwordField.getText();
     }
 
     public Button getSignUpButton() {

@@ -5,11 +5,14 @@
  */
 package src.AppUI;
 
+import java.time.LocalDate;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -27,14 +30,19 @@ import javafx.stage.Stage;
  */
 public class CreateProjectForm {
     private Stage modalWindow;
-    private Stage window;    
+    private Stage window;
     private VBox body;
     private Text title;
     private VBox formContainer;
     private Text projectNameLabel;
     private TextField projectNameField;
+    private Text priorityLabel;
+    private ComboBox priorityComboBox;
+    private Text projectDateLabel;    
+    private DatePicker projectDateField;
     private Button createProjectButton;
     private Scene scene;
+    
     
     
     public CreateProjectForm(Stage window) {
@@ -65,7 +73,18 @@ public class CreateProjectForm {
         projectNameLabel = new Text("Project name");        
         projectNameField = new TextField();
         projectNameField.setMaxWidth(400);
-        formContainer.getChildren().addAll(projectNameLabel, projectNameField);        
+        
+        priorityLabel = new Text("Priority");
+        priorityComboBox = new ComboBox();
+        priorityComboBox.setMaxWidth(400);
+        priorityComboBox.getItems().addAll("Low", "Medium", "High", "Very High");
+        priorityComboBox.setValue("Select a priority");        
+        
+        projectDateLabel = new Text("Select a due to Date");
+        projectDateField = new DatePicker();
+        projectDateField.setMaxWidth(400);       
+        
+        formContainer.getChildren().addAll(projectNameLabel, projectNameField, priorityLabel, priorityComboBox, projectDateLabel, projectDateField);  
         
         createProjectButton = new Button("Create project");
         createProjectButton.setBackground(new Background(new BackgroundFill(Color.web("#4285f4"), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -80,7 +99,7 @@ public class CreateProjectForm {
     
     public void show(){
         modalWindow = new Stage();
-        modalWindow.setHeight(300);
+        modalWindow.setHeight(450);
         modalWindow.setWidth(500);                                   
         body.getChildren().addAll(title, formContainer, createProjectButton);                
         scene = new Scene(body);
@@ -94,8 +113,8 @@ public class CreateProjectForm {
         modalWindow.showAndWait();
     }
 
-    public TextField getProjectNameField() {
-        return projectNameField;
+    public String getProjectNameField() {
+        return projectNameField.getText();
     }        
 
     public Button getCreateProjectButton() {
@@ -105,5 +124,27 @@ public class CreateProjectForm {
     public Stage getModalWindow() {
         return modalWindow;
     }
+
+    public LocalDate getProjectDateField() {
+        return projectDateField.getValue();
+    }
     
+    public int getPriorityField(){
+        String selectedItem = (String) priorityComboBox.getValue();
+
+        if(selectedItem.equals("Very High")) return 1;
+        
+        if(selectedItem.equals("High")) return 2;
+        
+        if(selectedItem.equals("Medium")) return 3;
+        
+        if(selectedItem.equals("Low")) return 4;
+        
+        return -1;
+    }
+    
+    public boolean validateForm(){
+        return false;
+    }
+        
 }
