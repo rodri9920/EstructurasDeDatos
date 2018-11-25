@@ -86,5 +86,13 @@ public class CreateProjectForm {
         window.setScene(scene);
         window.show();
     }
+
+    public TextField getProjectNameField() {
+        return projectNameField;
+    }        
+
+    public Button getCreateProjectButton() {
+        return createProjectButton;
+    }        
     
 }
