@@ -1,7 +1,7 @@
 
-package Package.DataModels;
+package src.DataModels;
 
-import Package.DataStructures.Tree;
+import src.DataStructures.Tree;
 
 
 public class Project {

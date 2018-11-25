@@ -1,8 +1,8 @@
 
-package Package.DataModels;
+package src.DataModels;
 
-import Package.DataStructures.Queue;
-import Package.DataStructures.Queue;
+import src.DataStructures.Queue;
+import src.DataStructures.Queue;
 
 
 public class User {
