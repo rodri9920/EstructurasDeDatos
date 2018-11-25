@@ -1,14 +1,14 @@
 
 package src.DataModels;
 
-import src.DataStructures.Tree;
+import src.DataStructures.Queue;
 
 
 public class Project {
     
-    private String name;
+    private String name, description;
     private int priority, month, day, year;
-    private Tree tasks;
+    private Queue tasks;
 
     public Project(String name, int priority, int month, int day, int year) {
         this.name = name;
@@ -16,7 +16,7 @@ public class Project {
         this.month = month;
         this.day = day;
         this.year = year;
-        this.tasks = new Tree();
+        this.tasks = new Queue();
     }
     
     public String getName() {
@@ -59,12 +59,12 @@ public class Project {
         this.year = year;
     }
 
-    public Tree getTasks() {
+    public Queue getTasks() {
         return tasks;
     }
 
-    public void setTasks(Tree tree) {
-        this.tasks = tree;
+    public void setTasks(Queue queue) {
+        this.tasks = queue;
     }
     
     

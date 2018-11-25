@@ -2,6 +2,7 @@
 package src.DataStructures;
 
 import src.DataModels.Project;
+import src.DataModels.Task;
 import src.DataModels.User;
 
 
@@ -10,7 +11,9 @@ public class Node {
     private User user;
     private Node next;
     private Node back;
-    private Project project;//For Queues
+    private Project project;//for stacks
+    private Node down;//for stacks
+    private Task tasks;//for queues
     private Node queueLast;//For Queues
     
    
@@ -22,6 +25,10 @@ public class Node {
         this.project = project;
     }
 
+    public Node(Task tasks) {
+        this.tasks = tasks;
+    }
+    
     public User getUser() {
         return user;
     }
@@ -60,6 +67,22 @@ public class Node {
 
     public void setQueueLast(Node queueLast) {
         this.queueLast = queueLast;
+    }
+
+    public Node getDown() {
+        return down;
+    }
+
+    public void setDown(Node down) {
+        this.down = down;
+    }
+
+    public Task getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Task tasks) {
+        this.tasks = tasks;
     }
 
     @Override

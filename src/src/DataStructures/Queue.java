@@ -2,23 +2,24 @@ package src.DataStructures;
 
 import javax.swing.JOptionPane;
 import src.DataModels.Project;
+import src.DataModels.Task;
 
 public class Queue {
 
     private Node first, last, data;
-    private Project dato;
+    private Task dato;
     private int length = 0;
 
-    public void enqueue(Project project) {
+    public void enqueue(Task task) {
         if (first == null) {
-            first = new Node(project);
+            first = new Node(task);
             last = first;
         } else {
             if (first == last) {
-                first.setQueueLast(new Node(project));
+                first.setQueueLast(new Node(task));
                 last = first.getQueueLast();
             } else {
-                last.setQueueLast(new Node(project));
+                last.setQueueLast(new Node(task));
                 last = last.getQueueLast();
             }
         }
@@ -29,7 +30,7 @@ public class Queue {
         return length;
     }
 
-    public Project getProject(int position) {
+    public Project getTask(int position) {
         int counter = 0;
         if (first != null) {
             Node aux = first;
@@ -47,21 +48,21 @@ public class Queue {
         }
     }
 
-    public boolean remove(Project project) {
+    public boolean remove(Task task) {
         if (first != null) {
-            if (first.getProject().equals(project)) {
-                if (first.getQueueLast() != null) {
+            if (first.getTasks().equals(task)) {
+                if (first.getQueueLast()!= null) {
                     first = first.getQueueLast();
                     length--;
                     return true;
                 } else {
                     length--;
-                    first.setProject(null);
+                    first.setTasks(null);
                 }
             } else {
                 Node aux = first;
                 while (aux.getQueueLast() != null) {
-                    if (aux.getQueueLast().getProject().equals(project)) {
+                    if (aux.getQueueLast().getTasks().equals(task)) {
                         aux.setQueueLast(aux.getQueueLast().getQueueLast());
                         length--;
                         return true;
@@ -82,10 +83,10 @@ public class Queue {
         Node temp = new Node(dato);
         if (aux != null) {
             while (aux.getQueueLast() != null) {
-                if (aux.getProject().getPriority() > aux.getQueueLast().getProject().getPriority()) {
-                    temp.setProject(aux.getProject());
-                    aux.setProject(aux.getQueueLast().getProject());
-                    aux.getQueueLast().setProject(temp.getProject());
+                if (aux.getTasks().getPriority() > aux.getQueueLast().getTasks().getPriority()) {
+                    temp.setTasks(aux.getTasks());
+                    aux.setTasks(aux.getQueueLast().getTasks());
+                    aux.getQueueLast().setTasks(temp.getTasks());
                     aux = first;
                 } else {
                     aux = aux.getQueueLast();
@@ -101,22 +102,22 @@ public class Queue {
         Node temp = new Node(dato);
         if (aux != null) {
             while (aux.getQueueLast() != null) {
-                if (aux.getProject().getYear() > aux.getQueueLast().getProject().getYear()) {
-                    temp.setProject(aux.getProject());
-                    aux.setProject(aux.getQueueLast().getProject());
-                    aux.getQueueLast().setProject(temp.getProject());
+                if (aux.getTasks().getYear() > aux.getQueueLast().getTasks().getYear()) {
+                    temp.setTasks(aux.getTasks());
+                    aux.setTasks(aux.getQueueLast().getTasks());
+                    aux.getQueueLast().setTasks(temp.getTasks());
                     aux = first;
-                } else if (aux.getProject().getYear() == aux.getQueueLast().getProject().getYear()) {
-                    if (aux.getProject().getMonth() > aux.getQueueLast().getProject().getMonth()) {
-                        temp.setProject(aux.getProject());
-                        aux.setProject(aux.getQueueLast().getProject());
-                        aux.getQueueLast().setProject(temp.getProject());
+                } else if (aux.getTasks().getYear() == aux.getQueueLast().getTasks().getYear()) {
+                    if (aux.getTasks().getMonth() > aux.getQueueLast().getTasks().getMonth()) {
+                        temp.setTasks(aux.getTasks());
+                        aux.setTasks(aux.getQueueLast().getTasks());
+                        aux.getQueueLast().setTasks(temp.getTasks());
                         aux = first;
-                    } else if (aux.getProject().getMonth() == aux.getQueueLast().getProject().getMonth()) {
-                        if (aux.getProject().getDay() > aux.getQueueLast().getProject().getDay()) {
-                            temp.setProject(aux.getProject());
-                            aux.setProject(aux.getQueueLast().getProject());
-                            aux.getQueueLast().setProject(temp.getProject());
+                    } else if (aux.getTasks().getMonth() == aux.getQueueLast().getTasks().getMonth()) {
+                        if (aux.getTasks().getDay() > aux.getQueueLast().getTasks().getDay()) {
+                            temp.setTasks(aux.getTasks());
+                            aux.setTasks(aux.getQueueLast().getTasks());
+                            aux.getQueueLast().setTasks(temp.getTasks());
                             aux = first;
                         } else {
                             aux = aux.getQueueLast();
@@ -138,7 +139,7 @@ public class Queue {
         String queue = "";
         Node aux = first;
         while (aux != null) {
-            queue += aux.getProject() + "\n";
+            queue += aux.getTasks()+ "\n";
             aux = aux.getQueueLast();
         }
         return queue;
