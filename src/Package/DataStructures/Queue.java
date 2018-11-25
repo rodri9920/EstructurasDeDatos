@@ -4,6 +4,7 @@ import Package.DataModels.Project;
 import javax.swing.JOptionPane;
 
 public class Queue {
+
     private Node first, last;
     private Project dato;
 
@@ -22,13 +23,12 @@ public class Queue {
         }
     }
 
-
     public void removeByName(String name) {
         if (first != null) {
             if (first.getProject().getName().equals(name)) {
-                if(first.getQueueLast() != null){
+                if (first.getQueueLast() != null) {
                     first = first.getQueueLast();
-                }else{
+                } else {
                     first.setProject(null);
                 }
             } else {
@@ -36,7 +36,7 @@ public class Queue {
                 while (aux.getQueueLast() != null) {
                     if (aux.getQueueLast().getProject().getName().equals(name)) {
                         aux.setQueueLast(aux.getQueueLast().getQueueLast());
-                    }else{
+                    } else {
                         aux = aux.getQueueLast();
                     }
                 }
@@ -52,7 +52,7 @@ public class Queue {
         Node temp = new Node(dato);
         if (aux != null) {
             while (aux.getQueueLast() != null) {
-                if (aux.getProject().getPriority()> aux.getQueueLast().getProject().getPriority()) {
+                if (aux.getProject().getPriority() > aux.getQueueLast().getProject().getPriority()) {
                     temp.setProject(aux.getProject());
                     aux.setProject(aux.getQueueLast().getProject());
                     aux.getQueueLast().setProject(temp.getProject());
@@ -71,11 +71,29 @@ public class Queue {
         Node temp = new Node(dato);
         if (aux != null) {
             while (aux.getQueueLast() != null) {
-                if (aux.getProject().getMonth()> aux.getQueueLast().getProject().getMonth()) {
+                if (aux.getProject().getYear() > aux.getQueueLast().getProject().getYear()) {
                     temp.setProject(aux.getProject());
                     aux.setProject(aux.getQueueLast().getProject());
                     aux.getQueueLast().setProject(temp.getProject());
                     aux = first;
+                } else if (aux.getProject().getYear() == aux.getQueueLast().getProject().getYear()) {
+                    if (aux.getProject().getMonth() > aux.getQueueLast().getProject().getMonth()) {
+                        temp.setProject(aux.getProject());
+                        aux.setProject(aux.getQueueLast().getProject());
+                        aux.getQueueLast().setProject(temp.getProject());
+                        aux = first;
+                    } else if (aux.getProject().getMonth() == aux.getQueueLast().getProject().getMonth()) {
+                        if (aux.getProject().getDay() > aux.getQueueLast().getProject().getDay()) {
+                            temp.setProject(aux.getProject());
+                            aux.setProject(aux.getQueueLast().getProject());
+                            aux.getQueueLast().setProject(temp.getProject());
+                            aux = first;
+                        }else{
+                            aux = aux.getQueueLast();
+                        }
+                    }else{
+                        aux = aux.getQueueLast();
+                    }
                 } else {
                     aux = aux.getQueueLast();
                 }
