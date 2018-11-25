@@ -10,8 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextBoundsType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -53,6 +51,7 @@ public class ModalUI{
         acceptBtn.setOnAction(e -> modalWindow.close());
         
         VBox modalBody = new VBox();
+        modalBody.setPadding(new Insets(30));
         modalBody.setSpacing(20);
         modalBody.setAlignment(Pos.CENTER);
         modalBody.getChildren().addAll(flex, acceptBtn);
@@ -62,5 +61,4 @@ public class ModalUI{
         modalWindow.setScene(modalScene);
         modalWindow.showAndWait();
     }
-  
 }

@@ -58,8 +58,16 @@ public class App extends Application {
     
     public void showCreateNewProjectForm(){
         CreateProjectForm projectForm = new CreateProjectForm(window);
+        projectForm.getCreateProjectButton().setOnAction(e -> {
+            if(!projectForm.getProjectNameField().getText().isEmpty()){                
+                createProject(projectForm.getProjectNameField().getText());
+                projectForm.getModalWindow().close();
+            }else{
+                ModalUI.alert(projectForm.getModalWindow(), "Please insert a Project name");
+            }
+        });
         projectForm.show();
-    }
+    }        
 
     public void signIn(String username, String password) {
         showProjects();
@@ -67,5 +75,9 @@ public class App extends Application {
 
     public void signUp(String username, String password) {
         showProjects();
+    }
+    
+    public void createProject(String name){
+        
     }
 }

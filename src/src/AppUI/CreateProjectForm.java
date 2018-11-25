@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
  * @author Marco
  */
 public class CreateProjectForm {
+    private Stage modalWindow;
     private Stage window;    
     private VBox body;
     private Text title;
@@ -77,14 +79,19 @@ public class CreateProjectForm {
     
     
     public void show(){
-        window.hide();                
-        window.setHeight(300);
-        window.setWidth(500);
-        body.getChildren().addAll(title, formContainer, createProjectButton);        
-        
+        modalWindow = new Stage();
+        modalWindow.setHeight(300);
+        modalWindow.setWidth(500);                                   
+        body.getChildren().addAll(title, formContainer, createProjectButton);                
         scene = new Scene(body);
-        window.setScene(scene);
-        window.show();
+        modalWindow.setScene(scene);
+        
+        modalWindow.initModality(Modality.APPLICATION_MODAL);
+        modalWindow.initOwner(window);        
+        modalWindow.getIcons().add(window.getIcons().get(0));
+        modalWindow.setTitle("Tasker - Create a Project");
+        
+        modalWindow.showAndWait();
     }
 
     public TextField getProjectNameField() {
@@ -93,6 +100,10 @@ public class CreateProjectForm {
 
     public Button getCreateProjectButton() {
         return createProjectButton;
-    }        
+    }
+
+    public Stage getModalWindow() {
+        return modalWindow;
+    }
     
 }
