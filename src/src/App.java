@@ -15,9 +15,9 @@ import src.DataStructures.UserList;
 
 public class App extends Application {
 
-    private Stage window;
-    private UserList users;
-    private User signedUser;
+    private static Stage window;
+    private static UserList users;
+    private static User signedUser;
 
     public static void main(String[] args) {
         launch(args);
@@ -31,7 +31,7 @@ public class App extends Application {
         showSignIn();
     }
 
-    public void showSignIn() {
+    public static void showSignIn() {
         SignInUI signInWindow = new SignInUI(window);
         signInWindow.getCreateAnAccount().setOnMouseClicked(e -> showSignUp());
         signInWindow.getSignInButton().setOnAction(e -> {
@@ -44,7 +44,7 @@ public class App extends Application {
         signInWindow.show();
     }
 
-    public void showSignUp() {
+    public static void showSignUp() {
         SignUpUI signUpWindow = new SignUpUI(window);
         signUpWindow.getSignInLink().setOnMouseClicked(e -> showSignIn());
         signUpWindow.getSignUpButton().setOnAction(e -> {
@@ -57,13 +57,13 @@ public class App extends Application {
         signUpWindow.show();
     }
 
-    public void showProjects() {
+    public static void showProjects() {
         ProjectsUI projectsWindow = new ProjectsUI(window, signedUser.getProjects());
         projectsWindow.getAddNewProjectButton().setOnAction(e -> showCreateProject());
         projectsWindow.show();
     }
     
-    public void showCreateTask(){
+    public static void showCreateTask(){
         CreateTaskUI createTaskForm = new CreateTaskUI(window);
         createTaskForm.getCreateTaskButton().setOnAction(e -> {
             if(createTaskForm.validateForm()){                
@@ -76,7 +76,7 @@ public class App extends Application {
         createTaskForm.show();
     }   
     
-    public void showCreateProject(){
+    public static void showCreateProject(){
         CreateProjectUI createProjectForm = new CreateProjectUI(window);
         createProjectForm.getCreateProjectButton().setOnAction(e -> {
             if(createProjectForm.validateForm()){             
@@ -93,7 +93,7 @@ public class App extends Application {
         createProjectForm.show();
     }
 
-    public void signIn(String username, String password) {
+    public static void signIn(String username, String password) {
         User user = users.signIn(username, password);
         if(user != null){
             ModalUI.alert(window, "Signed in succesfully");
@@ -104,7 +104,7 @@ public class App extends Application {
         }
     }
 
-    public void signUp(String username, String password) {
+    public static void signUp(String username, String password) {
         User user = new User(username, password);
         if(users.add(user)){
             ModalUI.alert(window, "User created succesfully");
@@ -115,8 +115,13 @@ public class App extends Application {
         }     
     }
     
-    public boolean createProject(String name, String descripton, int priority){
+    public static boolean createProject(String name, String descripton, int priority){
         Project project = new Project(name, descripton, priority);
         return signedUser.getProjects().push(project);        
+    }
+    
+    public static void signOut(){
+        signedUser = null;
+        showSignIn();
     }
 }

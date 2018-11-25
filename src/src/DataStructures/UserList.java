@@ -95,7 +95,7 @@ public class UserList {
         if (head != null) {//primero se pregunta si hay datos en la lista
             boolean exists = false;//este booleano nos servira para saber si el usuario esta en la lista o no
             if (head.getUser().getUsername().equals(username) && head.getUser().getPassword().equals(password)) {
-                exists = true;
+                return head.getUser();    
                 //primero verificamos si el usuario es esta en la cabeza de la lista
             } else {//de no ser asi, recorremos la lista con un auxiliar
                 Node aux = head.getNext();
