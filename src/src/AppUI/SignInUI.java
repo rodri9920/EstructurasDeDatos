@@ -98,8 +98,8 @@ public class SignInUI {
     public void show() {
         window.hide();
         window.setTitle("Tasker - Sign In");
-        window.setMinWidth(600);
-        window.setMinHeight(400);
+        window.setWidth(600);
+        window.setHeight(400);
         window.setResizable(false);
         window.setScene(scene);
         window.show();

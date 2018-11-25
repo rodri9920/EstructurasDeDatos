@@ -62,9 +62,9 @@ public class ProjectsUI {
         addNewProjectButton.setOnMouseEntered(e -> addNewProjectButton.setBackground(new Background(new BackgroundFill(Color.web("#67a0fd"), CornerRadii.EMPTY, Insets.EMPTY))));
         addNewProjectButton.setOnMouseExited(e -> addNewProjectButton.setBackground(new Background(new BackgroundFill(Color.web("#4285f4"), CornerRadii.EMPTY, Insets.EMPTY))));
 
-        addNewProjectButton.setOnAction(e -> {
-            projectsContainer.getChildren().add(createProjectItem("Project Name", 0));
-        });
+//        addNewProjectButton.setOnAction(e -> {
+//            projectsContainer.getChildren().add(createProjectItem("Project Name", 0));
+//        });
 
         header.setLeft(title);
 
@@ -131,11 +131,15 @@ public class ProjectsUI {
     public void show() {
         window.hide();
         window.setTitle("Tasker - Your Projects");
-        window.setMinWidth(800);
-        window.setMinHeight(500);
+        window.setWidth(800);
+        window.setHeight(500);
         window.setResizable(false);
         window.setScene(scene);
         window.show();
     }
 
+    public Button getAddNewProjectButton() {
+        return addNewProjectButton;
+    }
+    
 }

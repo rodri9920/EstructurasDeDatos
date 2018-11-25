@@ -1,7 +1,7 @@
 
 package src.DataStructures;
 
-import Package.DataStructures.NodeTree;
+import src.DataStructures.NodeTree;
 import src.DataModels.Task;
 
 

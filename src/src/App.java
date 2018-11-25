@@ -7,6 +7,7 @@ import src.AppUI.ModalUI;
 import src.AppUI.ProjectsUI;
 import src.AppUI.SignInUI;
 import src.AppUI.SignUpUI;
+import src.AppUI.CreateProjectForm;
 
 public class App extends Application {
 
@@ -51,7 +52,13 @@ public class App extends Application {
 
     public void showProjects() {
         ProjectsUI projectsWindow = new ProjectsUI(window);
+        projectsWindow.getAddNewProjectButton().setOnAction(e -> showCreateNewProjectForm());
         projectsWindow.show();
+    }
+    
+    public void showCreateNewProjectForm(){
+        CreateProjectForm projectForm = new CreateProjectForm(window);
+        projectForm.show();
     }
 
     public void signIn(String username, String password) {
