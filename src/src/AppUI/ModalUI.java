@@ -14,8 +14,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- *
- * @author dcortes
+ * @author Rodri
+ * @author Dorian
+ * @author Luis
  */
 public class ModalUI{
     

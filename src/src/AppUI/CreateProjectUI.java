@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package src.AppUI;
 
 import java.time.LocalDate;
@@ -25,10 +20,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- *
- * @author Marco
+ * @author Rodri
+ * @author Dorian
+ * @author Luis
  */
-public class CreateProjectForm {
+public class CreateProjectUI {
     private Stage modalWindow;
     private Stage window;
     private VBox body;
@@ -45,7 +41,7 @@ public class CreateProjectForm {
     
     
     
-    public CreateProjectForm(Stage window) {
+    public CreateProjectUI(Stage window) {
         this.window = window;
         setUpLayout();
         setUpTitle();
@@ -146,5 +142,4 @@ public class CreateProjectForm {
     public boolean validateForm(){
         return false;
     }
-        
 }

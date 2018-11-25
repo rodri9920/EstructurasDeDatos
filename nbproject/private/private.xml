@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/C:/Users/rodri/Desktop/U/Tercer%20Cuatri/Estructura%20de%20Datos/ProyectroEstructuras/EstructurasDeDatos/src/src/App.java</file>
             <file>file:/C:/Users/rodri/Desktop/U/Tercer%20Cuatri/Estructura%20de%20Datos/ProyectroEstructuras/EstructurasDeDatos/src/src/DataStructures/Queue.java</file>
             <file>file:/C:/Users/rodri/Desktop/U/Tercer%20Cuatri/Estructura%20de%20Datos/ProyectroEstructuras/EstructurasDeDatos/src/src/DataStructures/NodeTree.java</file>
@@ -11,6 +12,13 @@
             <file>file:/C:/Users/rodri/Desktop/U/Tercer%20Cuatri/Estructura%20de%20Datos/ProyectroEstructuras/EstructurasDeDatos/src/src/DataStructures/Node.java</file>
             <file>file:/C:/Users/rodri/Desktop/U/Tercer%20Cuatri/Estructura%20de%20Datos/ProyectroEstructuras/EstructurasDeDatos/src/src/DataModels/Task.java</file>
             <file>file:/C:/Users/rodri/Desktop/U/Tercer%20Cuatri/Estructura%20de%20Datos/ProyectroEstructuras/EstructurasDeDatos/src/src/DataModels/User.java</file>
+=======
+            <file>file:/home/zoe/Repositories/EstructurasDeDatos/src/src/AppUI/ModalUI.java</file>
+            <file>file:/home/zoe/Repositories/EstructurasDeDatos/src/src/AppUI/SignInUI.java</file>
+            <file>file:/home/zoe/Repositories/EstructurasDeDatos/src/src/AppUI/SignUpUI.java</file>
+            <file>file:/home/zoe/Repositories/EstructurasDeDatos/src/src/DataStructures/Tree.java</file>
+            <file>file:/home/zoe/Repositories/EstructurasDeDatos/src/src/App.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>

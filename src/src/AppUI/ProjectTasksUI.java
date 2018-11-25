@@ -25,21 +25,21 @@ import javafx.stage.Stage;
  * @author Dorian
  * @author Luis
  */
-public class ProjectsUI {
+public class ProjectTasksUI {
 
     Stage window;
     VBox body;
     BorderPane header;
     Text title;
-    Button addNewProjectButton;
+    Button addTaskButton;
     Scene scene;
-    VBox projectsContainer;
+    VBox tasksContainer;
 
-    public ProjectsUI(Stage window) {
+    public ProjectTasksUI(Stage window) {
         this.window = window;
         setUpLayout();
         setUpHeader();
-        setUpProjects();
+        setUpTasks();
         buildScene();
     }
 
@@ -51,31 +51,27 @@ public class ProjectsUI {
 
     private void setUpHeader() {
         header = new BorderPane();
-        title = new Text("Your Projects");
+        title = new Text("Project's name");
         title.setFont(new Font(34));
-        addNewProjectButton = new Button("Add a new Project");
+        addTaskButton = new Button("Add Task");
 
-        addNewProjectButton.setBackground(new Background(new BackgroundFill(Color.web("#4285f4"), CornerRadii.EMPTY, Insets.EMPTY)));
-        addNewProjectButton.setAlignment(Pos.CENTER);
-        addNewProjectButton.setMinSize(150, 30);
-        addNewProjectButton.setCursor(Cursor.HAND);
-        addNewProjectButton.setTextFill(Color.WHITE);
-        addNewProjectButton.setOnMouseEntered(e -> addNewProjectButton.setBackground(new Background(new BackgroundFill(Color.web("#67a0fd"), CornerRadii.EMPTY, Insets.EMPTY))));
-        addNewProjectButton.setOnMouseExited(e -> addNewProjectButton.setBackground(new Background(new BackgroundFill(Color.web("#4285f4"), CornerRadii.EMPTY, Insets.EMPTY))));
-
-//        addNewProjectButton.setOnAction(e -> {
-//            projectsContainer.getChildren().add(createProjectItem("Project Name", 0));
-//        });
+        addTaskButton.setBackground(new Background(new BackgroundFill(Color.web("#4285f4"), CornerRadii.EMPTY, Insets.EMPTY)));
+        addTaskButton.setAlignment(Pos.CENTER);
+        addTaskButton.setMinSize(150, 30);
+        addTaskButton.setCursor(Cursor.HAND);
+        addTaskButton.setTextFill(Color.WHITE);
+        addTaskButton.setOnMouseEntered(e -> addTaskButton.setBackground(new Background(new BackgroundFill(Color.web("#67a0fd"), CornerRadii.EMPTY, Insets.EMPTY))));
+        addTaskButton.setOnMouseExited(e -> addTaskButton.setBackground(new Background(new BackgroundFill(Color.web("#4285f4"), CornerRadii.EMPTY, Insets.EMPTY))));
 
         header.setLeft(title);
 
         VBox btnContainer = new VBox();
         btnContainer.setPadding(new Insets(10, 0, 0, 0));
-        btnContainer.getChildren().add(addNewProjectButton);
+        btnContainer.getChildren().add(addTaskButton);
         header.setRight(btnContainer);
     }
 
-    private BorderPane createProjectItem(String projectName, int tasksCount) {
+    private BorderPane createTaskItem(String projectName, String priority) {
         BorderPane item = new BorderPane();
         item.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), CornerRadii.EMPTY, Insets.EMPTY)));
         item.setBorder(new Border(new BorderStroke(Color.web("#cecece"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -87,7 +83,7 @@ public class ProjectsUI {
 
         Text projectNameLabel = new Text(projectName);
         projectNameLabel.setFont(new Font(14));
-        Text tasksCountLabel = new Text(String.valueOf(tasksCount));
+        Text tasksCountLabel = new Text(priority);
 
         VBox nameContainer = new VBox();
         VBox countsContainer = new VBox();
@@ -102,30 +98,24 @@ public class ProjectsUI {
 
         item.setLeft(nameContainer);
         item.setRight(countsContainer);
-        
-        item.setOnMouseClicked(e -> {
-            ProjectTasksUI projectTasksWindow = new ProjectTasksUI(window);
-            projectTasksWindow.show();
-        });
 
         return item;
     }
 
-    private void setUpProjects() {
-        projectsContainer = new VBox();
-        projectsContainer.setSpacing(5);
+    private void setUpTasks() {
+        tasksContainer = new VBox();
+        tasksContainer.setSpacing(5);
         // For testing
-        projectsContainer.getChildren().addAll(
-            createProjectItem("Project 1", 10),
-            createProjectItem("Project 2", 5),
-            createProjectItem("Project 3", 6),
-            createProjectItem("Project 4", 3),
-            createProjectItem("Project 5", 1)
+        tasksContainer.getChildren().addAll(
+            createTaskItem("Task 1", "Very High"),
+            createTaskItem("Task 2", "High"),
+            createTaskItem("Task 3", "Medium"),
+            createTaskItem("Task 4", "Low")
         );
     }
 
     private void buildScene() {
-        body.getChildren().addAll(header, projectsContainer);
+        body.getChildren().addAll(header, tasksContainer);
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
         scrollPane.setFitToHeight(true);
@@ -136,7 +126,7 @@ public class ProjectsUI {
 
     public void show() {
         window.hide();
-        window.setTitle("Tasker - Your Projects");
+        window.setTitle("Tasker - Project's name");
         window.setWidth(800);
         window.setHeight(500);
         window.setResizable(false);
@@ -144,8 +134,8 @@ public class ProjectsUI {
         window.show();
     }
 
-    public Button getAddNewProjectButton() {
-        return addNewProjectButton;
+    public Button getAddTaskButton() {
+        return addTaskButton;
     }
     
 }

@@ -7,9 +7,9 @@ import src.AppUI.ModalUI;
 import src.AppUI.ProjectsUI;
 import src.AppUI.SignInUI;
 import src.AppUI.SignUpUI;
-import src.AppUI.CreateProjectForm;
 import src.DataModels.Project;
 import src.DataModels.User;
+import src.AppUI.CreateProjectUI;
 
 public class App extends Application {
 
@@ -62,7 +62,7 @@ public class App extends Application {
     }
     
     public void showCreateNewProjectForm(){
-        CreateProjectForm projectForm = new CreateProjectForm(window);
+        CreateProjectUI projectForm = new CreateProjectUI(window);
         projectForm.getCreateProjectButton().setOnAction(e -> {
             if(projectForm.validateForm()){                
                 createProject(projectForm.getProjectNameField(), projectForm.getPriorityField(),  projectForm.getProjectDateField().getDayOfMonth(),  projectForm.getProjectDateField().getMonthValue(), projectForm.getProjectDateField().getYear());
