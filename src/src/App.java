@@ -3,13 +3,14 @@ package src;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import src.AppUI.CreateProjectUI;
 import src.AppUI.ModalUI;
 import src.AppUI.ProjectsUI;
 import src.AppUI.SignInUI;
 import src.AppUI.SignUpUI;
 import src.DataModels.Project;
 import src.DataModels.User;
-import src.AppUI.CreateProjectUI;
+import src.AppUI.CreateTaskUI;
 import src.DataStructures.UserList;
 
 public class App extends Application {
@@ -57,23 +58,40 @@ public class App extends Application {
     }
 
     public void showProjects() {
-        ProjectsUI projectsWindow = new ProjectsUI(window);
-        projectsWindow.getAddNewProjectButton().setOnAction(e -> showCreateNewProjectForm());
+        ProjectsUI projectsWindow = new ProjectsUI(window, signedUser.getProjects());
+        projectsWindow.getAddNewProjectButton().setOnAction(e -> showCreateProject());
         projectsWindow.show();
     }
     
-    public void showCreateNewProjectForm(){
-        CreateProjectUI projectForm = new CreateProjectUI(window);
-        projectForm.getCreateProjectButton().setOnAction(e -> {
-            if(projectForm.validateForm()){                
-                createProject(projectForm.getProjectNameField(), projectForm.getPriorityField(),  projectForm.getProjectDateField().getDayOfMonth(),  projectForm.getProjectDateField().getMonthValue(), projectForm.getProjectDateField().getYear());
-                projectForm.getModalWindow().close();
+    public void showCreateTask(){
+        CreateTaskUI createTaskForm = new CreateTaskUI(window);
+        createTaskForm.getCreateTaskButton().setOnAction(e -> {
+            if(createTaskForm.validateForm()){                
+                // CREATE TASK
+                createTaskForm.getModalWindow().close();
             }else{
-                ModalUI.alert(projectForm.getModalWindow(), "Please fill all the information");
+                ModalUI.alert(createTaskForm.getModalWindow(), "Please fill all the information correctly");
             }
         });
-        projectForm.show();
-    }        
+        createTaskForm.show();
+    }   
+    
+    public void showCreateProject(){
+        CreateProjectUI createProjectForm = new CreateProjectUI(window);
+        createProjectForm.getCreateProjectButton().setOnAction(e -> {
+            if(createProjectForm.validateForm()){             
+                if(createProject(createProjectForm.getProjectTitleField(), createProjectForm.getProjectDescriptionField(), createProjectForm.getPriorityField())){                    
+                    createProjectForm.getModalWindow().close();
+                    showProjects();
+                }else{
+                    ModalUI.alert(createProjectForm.getModalWindow(), "A project with title "+createProjectForm.getProjectTitleField()+" already exists");
+                }                
+            }else{
+                ModalUI.alert(createProjectForm.getModalWindow(), "Please fill all the information correctly");
+            }
+        });
+        createProjectForm.show();
+    }
 
     public void signIn(String username, String password) {
         User user = users.signIn(username, password);
@@ -97,13 +115,8 @@ public class App extends Application {
         }     
     }
     
-    public void createProject(String name, String descripton, int priority){
-        System.out.println("******************************");
-        for(int i=0; i<signedUser.getProjects().getLength(); i++){
-            System.out.println(signedUser.getProjects().getProject(i));
-        }
+    public boolean createProject(String name, String descripton, int priority){
         Project project = new Project(name, descripton, priority);
-        signedUser.getProjects().push(project);
-        
+        return signedUser.getProjects().push(project);        
     }
 }

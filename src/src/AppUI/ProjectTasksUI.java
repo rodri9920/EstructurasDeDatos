@@ -19,6 +19,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import src.DataModels.Project;
+import src.DataModels.Task;
 
 /**
  * @author Rodri
@@ -28,6 +30,7 @@ import javafx.stage.Stage;
 public class ProjectTasksUI {
 
     Stage window;
+    Project project;
     VBox body;
     BorderPane header;
     Text title;
@@ -35,8 +38,9 @@ public class ProjectTasksUI {
     Scene scene;
     VBox tasksContainer;
 
-    public ProjectTasksUI(Stage window) {
+    public ProjectTasksUI(Stage window, Project project) {
         this.window = window;
+        this.project = project;
         setUpLayout();
         setUpHeader();
         setUpTasks();
@@ -51,7 +55,7 @@ public class ProjectTasksUI {
 
     private void setUpHeader() {
         header = new BorderPane();
-        title = new Text("Project's name");
+        title = new Text(project.getName());
         title.setFont(new Font(34));
         addTaskButton = new Button("Add Task");
 
@@ -63,6 +67,8 @@ public class ProjectTasksUI {
         addTaskButton.setOnMouseEntered(e -> addTaskButton.setBackground(new Background(new BackgroundFill(Color.web("#67a0fd"), CornerRadii.EMPTY, Insets.EMPTY))));
         addTaskButton.setOnMouseExited(e -> addTaskButton.setBackground(new Background(new BackgroundFill(Color.web("#4285f4"), CornerRadii.EMPTY, Insets.EMPTY))));
 
+        addTaskButton.setOnAction(e -> showCreateTaskForm() );
+        
         header.setLeft(title);
 
         VBox btnContainer = new VBox();
@@ -71,8 +77,9 @@ public class ProjectTasksUI {
         header.setRight(btnContainer);
     }
 
-    private BorderPane createTaskItem(String projectName, String priority) {
+    private BorderPane createTaskItem(Task task) {
         BorderPane item = new BorderPane();
+        item.setPadding(new Insets(10));
         item.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), CornerRadii.EMPTY, Insets.EMPTY)));
         item.setBorder(new Border(new BorderStroke(Color.web("#cecece"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         item.setMinHeight(40);
@@ -81,23 +88,26 @@ public class ProjectTasksUI {
         item.setOnMouseEntered(e -> item.setBackground(new Background(new BackgroundFill(Color.web("#f3f3f3"), CornerRadii.EMPTY, Insets.EMPTY))));
         item.setOnMouseExited(e -> item.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), CornerRadii.EMPTY, Insets.EMPTY))));
 
-        Text projectNameLabel = new Text(projectName);
-        projectNameLabel.setFont(new Font(14));
-        Text tasksCountLabel = new Text(priority);
-
+        Text taskTitleLabel = new Text(task.getTitle());
+        taskTitleLabel.setFont(new Font(16));
+        Text taskDescriptionLabel = new Text(task.getDescription());
+        taskDescriptionLabel.setFill(Color.web("#545454"));
+        
+        Text tasksDateLabel = new Text(task.getDay()+"/"+task.getMonth()+"/"+task.getYear());
+        
         VBox nameContainer = new VBox();
-        VBox countsContainer = new VBox();
+        VBox dateContainer = new VBox();
 
         nameContainer.setPadding(new Insets(0, 0, 0, 20));
         nameContainer.setAlignment(Pos.CENTER_LEFT);
-        nameContainer.getChildren().add(projectNameLabel);
+        nameContainer.getChildren().addAll(taskTitleLabel, taskDescriptionLabel);
 
-        countsContainer.setAlignment(Pos.CENTER_RIGHT);
-        countsContainer.setPadding(new Insets(0, 20, 0, 0));
-        countsContainer.getChildren().add(tasksCountLabel);
+        dateContainer.setAlignment(Pos.CENTER_RIGHT);
+        dateContainer.setPadding(new Insets(0, 20, 0, 0));
+        dateContainer.getChildren().add(tasksDateLabel);
 
         item.setLeft(nameContainer);
-        item.setRight(countsContainer);
+        item.setRight(dateContainer);       
 
         return item;
     }
@@ -105,13 +115,10 @@ public class ProjectTasksUI {
     private void setUpTasks() {
         tasksContainer = new VBox();
         tasksContainer.setSpacing(5);
-        // For testing
-        tasksContainer.getChildren().addAll(
-            createTaskItem("Task 1", "Very High"),
-            createTaskItem("Task 2", "High"),
-            createTaskItem("Task 3", "Medium"),
-            createTaskItem("Task 4", "Low")
-        );
+        
+        for(int t = 0; t < project.getTasks().getLength(); t++){
+            tasksContainer.getChildren().add(createTaskItem(project.getTasks().getTask(t)));
+        }
     }
 
     private void buildScene() {
@@ -126,7 +133,7 @@ public class ProjectTasksUI {
 
     public void show() {
         window.hide();
-        window.setTitle("Tasker - Project's name");
+        window.setTitle("Tasker - "+project.getName());
         window.setWidth(800);
         window.setHeight(500);
         window.setResizable(false);
@@ -136,6 +143,21 @@ public class ProjectTasksUI {
 
     public Button getAddTaskButton() {
         return addTaskButton;
+    }
+    
+    private void showCreateTaskForm(){
+        CreateTaskUI createTask = new CreateTaskUI(window);
+        createTask.getCreateTaskButton().setOnAction(e -> {
+            if(createTask.validateForm()){
+                Task task = new Task(createTask.getTaskTitleField(), createTask.getTaskDescriptionField(), createTask.getPriorityField(), createTask.getProjectDateField().getDayOfMonth(), createTask.getProjectDateField().getMonthValue(), createTask.getProjectDateField().getYear());                
+                project.getTasks().enqueue(task);
+                ProjectTasksUI refreshed = new ProjectTasksUI(window, project);
+                refreshed.show();
+            }else{
+                ModalUI.alert(createTask.getModalWindow(), "Please fill all the fields correctly");
+            }
+        });
+        createTask.show();
     }
     
 }

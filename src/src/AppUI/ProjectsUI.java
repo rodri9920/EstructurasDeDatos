@@ -8,17 +8,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import src.DataModels.Project;
+import src.DataStructures.Stack;
 
 /**
  * @author Rodri
@@ -26,17 +24,20 @@ import javafx.stage.Stage;
  * @author Luis
  */
 public class ProjectsUI {
+    
+    private Stage window;
+    private Stack projects;
+    private VBox body;
+    private BorderPane header;
+    private Text title;
+    private Button addNewProjectButton;
+    private Scene scene;
+    private VBox projectsContainer;
+    
 
-    Stage window;
-    VBox body;
-    BorderPane header;
-    Text title;
-    Button addNewProjectButton;
-    Scene scene;
-    VBox projectsContainer;
-
-    public ProjectsUI(Stage window) {
+    public ProjectsUI(Stage window, Stack projects) {
         this.window = window;
+        this.projects = projects;
         setUpLayout();
         setUpHeader();
         setUpProjects();
@@ -63,10 +64,6 @@ public class ProjectsUI {
         addNewProjectButton.setOnMouseEntered(e -> addNewProjectButton.setBackground(new Background(new BackgroundFill(Color.web("#67a0fd"), CornerRadii.EMPTY, Insets.EMPTY))));
         addNewProjectButton.setOnMouseExited(e -> addNewProjectButton.setBackground(new Background(new BackgroundFill(Color.web("#4285f4"), CornerRadii.EMPTY, Insets.EMPTY))));
 
-//        addNewProjectButton.setOnAction(e -> {
-//            projectsContainer.getChildren().add(createProjectItem("Project Name", 0));
-//        });
-
         header.setLeft(title);
 
         VBox btnContainer = new VBox();
@@ -74,54 +71,16 @@ public class ProjectsUI {
         btnContainer.getChildren().add(addNewProjectButton);
         header.setRight(btnContainer);
     }
-
-    private BorderPane createProjectItem(String projectName, int tasksCount) {
-        BorderPane item = new BorderPane();
-        item.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), CornerRadii.EMPTY, Insets.EMPTY)));
-        item.setBorder(new Border(new BorderStroke(Color.web("#cecece"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        item.setMinHeight(40);
-        item.setCursor(Cursor.HAND);
-
-        item.setOnMouseEntered(e -> item.setBackground(new Background(new BackgroundFill(Color.web("#f3f3f3"), CornerRadii.EMPTY, Insets.EMPTY))));
-        item.setOnMouseExited(e -> item.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), CornerRadii.EMPTY, Insets.EMPTY))));
-
-        Text projectNameLabel = new Text(projectName);
-        projectNameLabel.setFont(new Font(14));
-        Text tasksCountLabel = new Text(String.valueOf(tasksCount));
-
-        VBox nameContainer = new VBox();
-        VBox countsContainer = new VBox();
-
-        nameContainer.setPadding(new Insets(0, 0, 0, 20));
-        nameContainer.setAlignment(Pos.CENTER_LEFT);
-        nameContainer.getChildren().add(projectNameLabel);
-
-        countsContainer.setAlignment(Pos.CENTER_RIGHT);
-        countsContainer.setPadding(new Insets(0, 20, 0, 0));
-        countsContainer.getChildren().add(tasksCountLabel);
-
-        item.setLeft(nameContainer);
-        item.setRight(countsContainer);
-        
-        item.setOnMouseClicked(e -> {
-            ProjectTasksUI projectTasksWindow = new ProjectTasksUI(window);
-            projectTasksWindow.show();
-        });
-
-        return item;
-    }
-
+    
     private void setUpProjects() {
         projectsContainer = new VBox();
         projectsContainer.setSpacing(5);
-        // For testing
-        projectsContainer.getChildren().addAll(
-            createProjectItem("Project 1", 10),
-            createProjectItem("Project 2", 5),
-            createProjectItem("Project 3", 6),
-            createProjectItem("Project 4", 3),
-            createProjectItem("Project 5", 1)
-        );
+        
+        for(int p = 0; p < projects.getLength(); p++){
+            Project project = projects.getProject(p);
+            ProjectItemUI projectItem = new ProjectItemUI(window, project);
+            projectsContainer.getChildren().add(projectItem);
+        }                
     }
 
     private void buildScene() {

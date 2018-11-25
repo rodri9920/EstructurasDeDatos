@@ -10,30 +10,29 @@ public class Stack {
     private int length = 0;
     
     public boolean push(Project project){
-        if(top != null){
+        if(top == null){
             top = new Node(project);
             length++;
             return true;
         }else{
-            boolean getsIn = true;
+            boolean getsIn = false;
             Node aux = top;
             while(aux != null){
                 if(project.getName().equals(aux.getProject().getName())){
-                    getsIn = false;
+                    getsIn = true;
                     break;
                 }else{
                     aux = aux.getDown();
                 }
             }
-            if(getsIn){
+            if(!getsIn){
                 Node n = new Node(project);
-                top.setDown(n);
+                n.setDown(top);
                 top = n;
                 length++;
-            }else{
-                System.out.println("There is already a project with that name");
             }
-            return getsIn;
+            
+            return !getsIn;
             
         }
     }
@@ -70,7 +69,7 @@ public class Stack {
                 if (counter == position) {
                     return aux.getProject();
                 } else {
-                    aux = aux.getQueueLast();
+                    aux = aux.getDown();
                     counter++;
                 }
             }
