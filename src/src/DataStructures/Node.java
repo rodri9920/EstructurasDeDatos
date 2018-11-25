@@ -1,9 +1,9 @@
 
-package Package.DataStructures;
+package src.DataStructures;
 
-import Package.DataModels.Project;
-import Package.DataModels.Task;
-import Package.DataModels.User;
+import src.DataModels.Project;
+import src.DataModels.Task;
+import src.DataModels.User;
 
 
 public class Node {

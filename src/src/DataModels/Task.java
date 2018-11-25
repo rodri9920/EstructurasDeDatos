@@ -1,5 +1,5 @@
 
-package Package.DataModels;
+package src.DataModels;
 
 
 public class Task {
