@@ -8,7 +8,7 @@ public class UserList {
     private Node head;
     private Node last;
 
-    public void add(User user) {//este metodo servira para agregar usuarios, pedimos de parametro un objeto del mismo
+    public boolean add(User user) {//este metodo servira para agregar usuarios, pedimos de parametro un objeto del mismo
         if (head == null) {
             head = new Node(user);
             last = head;
@@ -20,7 +20,7 @@ public class UserList {
                     last = last.getNext();
                     //si solo hay un dato, colocamos el usuario despues del primero
                 } else {
-                    JOptionPane.showMessageDialog(null, "That username already exists");
+                    return false;
                     //si el username ya esta registrado, se lo hacemos saber al usuario
                 }
             } else {//si hay dos datos o mas 
@@ -41,23 +41,24 @@ public class UserList {
                         }
                     }
                 }
-                if(getsIn){
+                if (getsIn) {
                     Node temp = new Node(user);
                     last.setNext(temp);
                     temp.setBack(last);
                     last = temp;
                     //si el booleano se mantuvo en true, entonces introducimos el usuario a la lista
-                }else{
-                    JOptionPane.showMessageDialog(null, "That username already exists");//si esta en false, le decimos que el username no esta disponible
+                } else {
+                    return false;//si esta en false, le decimos que el username no esta disponible
                 }
-                
+
             }
         }
         head.setBack(last);
         last.setNext(head);
+        return true;
     }
 
-    public void removeByNameAndPassword(String username, String password) {//este metodo es para eliminar usuarios
+    public boolean removeByNameAndPassword(String username, String password) {//este metodo es para eliminar usuarios
         if (head != null) {//primero se pregunta si la lista tiene datos
             boolean removed = false;//este booleano nos indicara si se elimino algun usuario o no
             if (head.getUser().getUsername().equals(username) && head.getUser().getPassword().equals(password)) {
@@ -82,14 +83,15 @@ public class UserList {
                     }
                 }
             }
-            JOptionPane.showMessageDialog(null, removed ? "User removed" : "User did not exist");
+            return removed;
             //mandamos un mensaje diciendole al usuario que se logro eliminar o que no se encontro el usuario correspondiente
         } else {
             System.out.println("There's no data");
+            return false;
         }
     }
 
-    public void signIn(String username, String password) {//este metodo nos servira para iniciar sesion
+    public User signIn(String username, String password) {//este metodo nos servira para iniciar sesion
         if (head != null) {//primero se pregunta si hay datos en la lista
             boolean exists = false;//este booleano nos servira para saber si el usuario esta en la lista o no
             if (head.getUser().getUsername().equals(username) && head.getUser().getPassword().equals(password)) {
@@ -99,19 +101,17 @@ public class UserList {
                 Node aux = head.getNext();
                 while (aux != head) {//mientras sea diferente de cabeza, ya que al ser circular, cuando sea cabeza es porque termino de recorrer
                     if (aux.getUser().getUsername().equals(username) && aux.getUser().getPassword().equals(password)) {
-                        exists = true;
-                        break;
+                        return aux.getUser();
                         //si los datos coinciden, hacemos un break y el booleano pasa a true, indicando que si esta el usuario
                     } else {
                         aux = aux.getNext();
                     }
                 }
             }
-            JOptionPane.showMessageDialog(null, exists ? "Welcome" : "User does not exist");
+
             //si el usuario se encontro, le damos la bienvenida, si no entonces decimos que no esta
-        } else {
-            JOptionPane.showMessageDialog(null, "There are no users");
         }
+        return null;
     }
 
     @Override

@@ -8,7 +8,7 @@ public class Project {
     
     private String name;
     private int priority, month, day, year;
-    private Tree tree;
+    private Tree tasks;
 
     public Project(String name, int priority, int month, int day, int year) {
         this.name = name;
@@ -16,7 +16,7 @@ public class Project {
         this.month = month;
         this.day = day;
         this.year = year;
-        this.tree = new Tree();
+        this.tasks = new Tree();
     }
     
     public String getName() {
@@ -59,12 +59,12 @@ public class Project {
         this.year = year;
     }
 
-    public Tree getTree() {
-        return tree;
+    public Tree getTasks() {
+        return tasks;
     }
 
-    public void setTree(Tree tree) {
-        this.tree = tree;
+    public void setTasks(Tree tree) {
+        this.tasks = tree;
     }
     
     

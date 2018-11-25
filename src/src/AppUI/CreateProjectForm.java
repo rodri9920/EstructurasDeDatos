@@ -144,7 +144,7 @@ public class CreateProjectForm {
     }
     
     public boolean validateForm(){
-        return false;
+        return true;
     }
         
 }

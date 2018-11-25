@@ -1,6 +1,5 @@
 package src.DataStructures;
 
-
 import javax.swing.JOptionPane;
 import src.DataModels.Project;
 
@@ -8,58 +7,64 @@ public class Queue {
 
     private Node first, last, data;
     private Project dato;
+    private int length = 0;
 
     public void enqueue(Project project) {
-        if(1 <= project.getPriority() && project.getPriority() <= 4){
-            if (first == null) {
-                first = new Node(project);
-                last = first;
+        if (first == null) {
+            first = new Node(project);
+            last = first;
+        } else {
+            if (first == last) {
+                first.setQueueLast(new Node(project));
+                last = first.getQueueLast();
             } else {
-                if (first == last) {
-                    first.setQueueLast(new Node(project));
-                    last = first.getQueueLast();
-                } else {
-                    last.setQueueLast(new Node(project));
-                    last = last.getQueueLast();
-                }
+                last.setQueueLast(new Node(project));
+                last = last.getQueueLast();
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "Project's pryority has to be from 1 to 4");
         }
-        
-    }
-    
-    public Project getProject(String name){
-        if(first != null){
-            Node aux = first;
-            while(aux != null){
-                if(aux.getProject().getName().equals(name)){
-                    return aux.getProject();
-                }else{
-                    aux = aux.getQueueLast();
-                }
-            }
-            JOptionPane.showMessageDialog(null, "This user has no projects");
-        }else{
-            JOptionPane.showMessageDialog(null, "This user has no projects");
-            return null;
-        }
-        return null;
+        length++;
     }
 
-    public void removeByName(String name) {
+    public int getLength() {
+        return length;
+    }
+
+    public Project getProject(int position) {
+        int counter = 0;
         if (first != null) {
-            if (first.getProject().getName().equals(name)) {
+            Node aux = first;
+            while (aux != null) {
+                if (counter == position) {
+                    return aux.getProject();
+                } else {
+                    aux = aux.getQueueLast();
+                    counter++;
+                }
+            }
+            return null;
+        } else {
+            return null;
+        }
+    }
+
+    public boolean remove(Project project) {
+        if (first != null) {
+            if (first.getProject().equals(project)) {
                 if (first.getQueueLast() != null) {
                     first = first.getQueueLast();
+                    length--;
+                    return true;
                 } else {
+                    length--;
                     first.setProject(null);
                 }
             } else {
                 Node aux = first;
                 while (aux.getQueueLast() != null) {
-                    if (aux.getQueueLast().getProject().getName().equals(name)) {
+                    if (aux.getQueueLast().getProject().equals(project)) {
                         aux.setQueueLast(aux.getQueueLast().getQueueLast());
+                        length--;
+                        return true;
                     } else {
                         aux = aux.getQueueLast();
                     }
@@ -67,8 +72,9 @@ public class Queue {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "This user has no projects");
+            return false;
         }
+        return false;
     }
 
     public void orderByPriority() {
@@ -112,10 +118,10 @@ public class Queue {
                             aux.setProject(aux.getQueueLast().getProject());
                             aux.getQueueLast().setProject(temp.getProject());
                             aux = first;
-                        }else{
+                        } else {
                             aux = aux.getQueueLast();
                         }
-                    }else{
+                    } else {
                         aux = aux.getQueueLast();
                     }
                 } else {
