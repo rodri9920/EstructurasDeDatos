@@ -1,5 +1,5 @@
 
-package Package.DataStructures;
+package src.DataStructures;
 
 import src.DataModels.Task;
 
