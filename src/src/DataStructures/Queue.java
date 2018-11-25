@@ -1,7 +1,6 @@
 package src.DataStructures;
 
 import javax.swing.JOptionPane;
-import src.DataModels.Project;
 import src.DataModels.Task;
 
 public class Queue {
@@ -30,13 +29,13 @@ public class Queue {
         return length;
     }
 
-    public Project getTask(int position) {
+    public Task getTask(int position) {
         int counter = 0;
         if (first != null) {
             Node aux = first;
             while (aux != null) {
                 if (counter == position) {
-                    return aux.getProject();
+                    return aux.getTasks();
                 } else {
                     aux = aux.getQueueLast();
                     counter++;

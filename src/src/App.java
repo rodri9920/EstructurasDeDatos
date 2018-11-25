@@ -97,12 +97,13 @@ public class App extends Application {
         }     
     }
     
-    public void createProject(String name, int priority, int day, int month, int year){
+    public void createProject(String name, String descripton, int priority){
         System.out.println("******************************");
         for(int i=0; i<signedUser.getProjects().getLength(); i++){
             System.out.println(signedUser.getProjects().getProject(i));
         }
-        Project project = new Project(name, priority, month, day, year);
-        signedUser.getProjects().enqueue(project);
+        Project project = new Project(name, descripton, priority);
+        signedUser.getProjects().push(project);
+        
     }
 }

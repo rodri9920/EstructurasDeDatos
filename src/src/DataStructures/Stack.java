@@ -14,10 +14,25 @@ public class Stack {
             top = new Node(project);
             length++;
         }else{
-            Node n = new Node(project);
-            top.setDown(n);
-            top = n;
-            length++;
+            boolean getsIn = true;
+            Node aux = top;
+            while(aux != null){
+                if(project.getName().equals(aux.getProject().getName())){
+                    getsIn = false;
+                    break;
+                }else{
+                    aux = aux.getDown();
+                }
+            }
+            if(getsIn){
+                Node n = new Node(project);
+                top.setDown(n);
+                top = n;
+                length++;
+            }else{
+                System.out.println("There is already a project with that name");
+            }
+            
         }
     }
     

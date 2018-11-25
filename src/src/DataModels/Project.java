@@ -7,15 +7,13 @@ import src.DataStructures.Queue;
 public class Project {
     
     private String name, description;
-    private int priority, month, day, year;
+    private int priority;
     private Queue tasks;
 
-    public Project(String name, int priority, int month, int day, int year) {
+    public Project(String name, String description, int priority) {
         this.name = name;
+        this.description = description;
         this.priority = priority;
-        this.month = month;
-        this.day = day;
-        this.year = year;
         this.tasks = new Queue();
     }
     
@@ -27,13 +25,14 @@ public class Project {
         this.name = name;
     }
 
-    public int getMonth() {
-        return month;
+    public String getDescription() {
+        return description;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
+    public void setDescription(String description) {
+        this.description = description;
     }
+    
 
     public int getPriority() {
         return priority;
@@ -43,22 +42,6 @@ public class Project {
         this.priority = priority;
     }
 
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
     public Queue getTasks() {
         return tasks;
     }
@@ -66,8 +49,6 @@ public class Project {
     public void setTasks(Queue queue) {
         this.tasks = queue;
     }
-    
-    
     
     @Override
     public String toString() {
