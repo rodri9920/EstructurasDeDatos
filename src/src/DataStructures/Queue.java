@@ -11,18 +11,23 @@ public class Queue {
     private Project dato;
 
     public void enqueue(Project project) {
-        if (first == null) {
-            first = new Node(project);
-            last = first;
-        } else {
-            if (first == last) {
-                first.setQueueLast(new Node(project));
-                last = first.getQueueLast();
+        if(1 <= project.getPriority() && project.getPriority() <= 4){
+            if (first == null) {
+                first = new Node(project);
+                last = first;
             } else {
-                last.setQueueLast(new Node(project));
-                last = last.getQueueLast();
+                if (first == last) {
+                    first.setQueueLast(new Node(project));
+                    last = first.getQueueLast();
+                } else {
+                    last.setQueueLast(new Node(project));
+                    last = last.getQueueLast();
+                }
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Project's pryority has to be from 1 to 4");
         }
+        
     }
 
     public void removeByName(String name) {
