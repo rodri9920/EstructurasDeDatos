@@ -7,111 +7,122 @@ public class UserList {
 
     private Node head;
     private Node last;
-
-    public boolean add(User user) {//este metodo servira para agregar usuarios, pedimos de parametro un objeto del mismo
+    
+    /**
+     * This method is used to add users to the list
+     * @param user it is the user we are going to add
+     * @return a boolean which indicates if the user is able to get in the list or not
+     */
+    public boolean add(User user) {
         if (head == null) {
             head = new Node(user);
             last = head;
-            //si no hay datos, colocamos el dato en la cabeza
+            //if there is no data in the list, we put the user in head
         } else {
             if (last == head) {
-                if (!head.getUser().getUsername().equals(user.getUsername())) {//debemos primero asegurar que el username no sea el mismo
+                if (!head.getUser().getUsername().equals(user.getUsername())) {//we must be sure that usernames are not repeated
                     last.setNext(new Node(user));
                     last = last.getNext();
-                    //si solo hay un dato, colocamos el usuario despues del primero
+                    //if there is only one user, we add the new one next to the first one
                 } else {
-                    return false;
-                    //si el username ya esta registrado, se lo hacemos saber al usuario
+                    return false;//if the username is already in the list, our method will return false
                 }
-            } else {//si hay dos datos o mas 
-                boolean getsIn = true;//este booleano nos va a servir para saber si el username esta disponible o si se repite
+            } else {//if there are more than two users in the list
+                boolean getsIn = true;//this boolean will be usefull to know if the user is able to get in the list
                 if (head.getUser().getUsername().equals(user.getUsername())) {
                     getsIn = false;
-                    //primero lo comparamos con la cabeza, y si es igual el booleano pasa a false, indicando que no entrara en la lista
+                    //if the username is already in the list, our boolean variable will turn to false
                 } else {
                     Node aux = head.getNext();
-                    //si el username no es el mismo que de cabeza, recorremos la lista con un aux
-                    while (aux != head) {//ya que es una lista circular, comenzamos debajo de cabeza, y termina el ciclo cuando el aux vuelva a ser cabeza
+                    while (aux != head) {//if the aux becomes head, it means that it already pass through every node in the list
                         if (aux.getUser().getUsername().equals(user.getUsername())) {
                             getsIn = false;
-                            break;
-                            //preguntamos con cada dato si los usernames son iguales, en caso de que lo sean el booleano pasa a false y usamos un break
-                        } else {//si no son iguales, el aux sigue recorriendo la lista
+                            break;//we must remember to break the while cicle in order to get out of it
+                            //if the username is already in the list, our boolean variable will turn to false
+                        } else {
                             aux = aux.getNext();
                         }
                     }
                 }
-                if (getsIn) {
+                if (getsIn) {//if the variable remains true
                     Node temp = new Node(user);
                     last.setNext(temp);
                     temp.setBack(last);
                     last = temp;
-                    //si el booleano se mantuvo en true, entonces introducimos el usuario a la lista
                 } else {
-                    return false;//si esta en false, le decimos que el username no esta disponible
+                    return false;//if not, we return false to indicate that the user can not enter the list
                 }
 
             }
         }
         head.setBack(last);
         last.setNext(head);
-        return true;
+        return true;//if the method gets here, it is because the user is able to be added to the list
     }
-
-    public boolean removeByNameAndPassword(String username, String password) {//este metodo es para eliminar usuarios
-        if (head != null) {//primero se pregunta si la lista tiene datos
-            boolean removed = false;//este booleano nos indicara si se elimino algun usuario o no
+    
+    
+    /**
+     * this method will be useful to remove users from the list 
+     * @param username
+     * @param password
+     * @return a boolean, which in case of true indicates that the user is in the list
+     */
+    public boolean removeByNameAndPassword(String username, String password) {
+        if (head != null) {//the first thing we do is to verify that our list is not empty
+            boolean removed = false;
             if (head.getUser().getUsername().equals(username) && head.getUser().getPassword().equals(password)) {
                 head = head.getNext();
                 head.setBack(last);
                 last.setNext(head);
                 removed = true;
-                //primero preguntamos si el username y password son los que estan en cabeza, de ser asi simplente eliminamos cabeza
+                //if the username and its password are in the head, we turned the variable to true
             } else {
                 Node aux = head;
-                //si no es cabeza el usuario a eliminar, debemos recorrer la lista con un auxiliar
-                while (aux.getNext() != head) {//ya que se preguntara por el dato que esta despues, si el aux vuelve a ser cabeza es que termino de recorre la lista
+                while (aux.getNext() != head) {//once the aux becomes head again it means that it already finished passing through the list
                     if (aux.getNext().getUser().getUsername().equals(username) && aux.getNext().getUser().getPassword().equals(password)) {
                         aux.setNext(aux.getNext().getNext());
                         aux.getNext().setBack(aux);
                         removed = true;
                         break;
-                        //si se encuentra al usuario, entonces lo eliminamos y aplicamos un break
-                        //de igual forma, el booleano pasa a ser true
-                    } else {
-                        aux = aux.getNext();//si no coinciden los datos, el auxiliar sigue recorriendo la lista
-                    }
-                }
-            }
-            return removed;
-            //mandamos un mensaje diciendole al usuario que se logro eliminar o que no se encontro el usuario correspondiente
-        } else {
-            System.out.println("There's no data");
-            return false;
-        }
-    }
-
-    public User signIn(String username, String password) {//este metodo nos servira para iniciar sesion
-        if (head != null) {//primero se pregunta si hay datos en la lista
-            boolean exists = false;//este booleano nos servira para saber si el usuario esta en la lista o no
-            if (head.getUser().getUsername().equals(username) && head.getUser().getPassword().equals(password)) {
-                return head.getUser();    
-                //primero verificamos si el usuario es esta en la cabeza de la lista
-            } else {//de no ser asi, recorremos la lista con un auxiliar
-                Node aux = head.getNext();
-                while (aux != head) {//mientras sea diferente de cabeza, ya que al ser circular, cuando sea cabeza es porque termino de recorrer
-                    if (aux.getUser().getUsername().equals(username) && aux.getUser().getPassword().equals(password)) {
-                        return aux.getUser();
-                        //si los datos coinciden, hacemos un break y el booleano pasa a true, indicando que si esta el usuario
+                        //if the aux finds a node that contains the information, the removed variable removes turns true and we break the cicle
                     } else {
                         aux = aux.getNext();
                     }
                 }
             }
-
-            //si el usuario se encontro, le damos la bienvenida, si no entonces decimos que no esta
+            return removed;
+        } else {
+            System.out.println("There's no data");
+            return false;
         }
-        return null;
+    }
+    
+    
+    /**
+     * this method will be one used when a user wants to signIn in the application
+     * @param username
+     * @param password
+     * @return the user if it is in the list, if not, the method returns null
+     */
+    public User signIn(String username, String password) {
+        if (head != null) {//the first thing we do is to verify that our list is not empty
+            boolean exists = false;
+            if (head.getUser().getUsername().equals(username) && head.getUser().getPassword().equals(password)) {
+                return head.getUser();
+                //if the user is in head, we return it
+            } else {
+                Node aux = head.getNext();
+                while (aux != head) {//once the aux becomes head again it means that it already finished passing through the list
+                    if (aux.getUser().getUsername().equals(username) && aux.getUser().getPassword().equals(password)) {
+                        return aux.getUser();
+                        //if the aux finds a node that contains the information, the removed variable removes turns true and we break the cicle
+                    } else {
+                        aux = aux.getNext();
+                    }
+                }
+            }
+        }
+        return null;//if the user is not in the list, the method will return null
     }
 
     @Override
