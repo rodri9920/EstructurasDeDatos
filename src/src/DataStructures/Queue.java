@@ -142,6 +142,8 @@ public class Queue {
                if(aux.getTasks().isFinished()){
                    finishedTasks += aux.getTasks() + "\n";
                    aux=aux.getNext();
+               }else{
+                   aux = aux.getNext();
                }
            }
             
