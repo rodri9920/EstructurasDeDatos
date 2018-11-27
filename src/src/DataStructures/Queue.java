@@ -131,6 +131,26 @@ public class Queue {
         } else {
             JOptionPane.showMessageDialog(null, "This user has no projects");
         }
+        
+    }
+    
+    public String getFinishedTasks(){
+        String finishedTasks="";
+        if(first!=null){
+           Node aux=first;
+           while(aux!=null){
+               if(aux.getTasks().isFinished()){
+                   finishedTasks += aux.getTasks() + "\n";
+                   aux=aux.getNext();
+               }
+           }
+            
+        }
+        if(finishedTasks.equals("")){
+            return "There are no finished tasks";
+        }else{
+            return finishedTasks;
+        }
     }
 
     @Override

@@ -6,6 +6,7 @@ public class Task {
     
     private String title, description;
     private int priority, month, day, year;
+    private boolean finished;
 
     public Task(String title, String description, int priority, int month, int day, int year) {
         this.title = title;
@@ -14,6 +15,7 @@ public class Task {
         this.month = month;
         this.day = day;
         this.year = year;
+        this.finished=false;
     }
 
     public String getTitle() {
@@ -63,6 +65,16 @@ public class Task {
     public void setYear(int year) {
         this.year = year;
     }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
+   
     
 
     @Override
