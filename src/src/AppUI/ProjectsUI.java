@@ -104,7 +104,7 @@ public class ProjectsUI {
         Text projectDescriptionLabel = new Text(project.getDescription());
         projectDescriptionLabel.setFill(Color.web("#545454"));
         
-        Text tasksCountLabel = new Text(String.valueOf(project.getTasks().getLength()));
+        Text tasksCountLabel = new Text(String.valueOf(project.getTasks().getFinishedTasks())+"/"+String.valueOf(project.getTasks().getLength()));
         
         VBox nameContainer = new VBox();
         VBox countsContainer = new VBox();
@@ -131,10 +131,7 @@ public class ProjectsUI {
             Project project = projects.getProject(p);
             BorderPane projectItem = createProjectItem(project);
             projectItem.setOnMouseClicked(e -> {
-                ProjectTasksUI projectTasksWindow = new ProjectTasksUI(window, project);
-                projectTasksWindow.getBackLink().setOnMouseClicked(ev->{
-                    show();
-                });
+                ProjectTasksUI projectTasksWindow = new ProjectTasksUI(window, project);                
                 projectTasksWindow.show();
             });
             projectsContainer.getChildren().add(projectItem);

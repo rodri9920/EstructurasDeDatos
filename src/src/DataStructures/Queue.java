@@ -1,6 +1,5 @@
 package src.DataStructures;
 
-import javax.swing.JOptionPane;
 import src.DataModels.Task;
 
 public class Queue {
@@ -91,9 +90,7 @@ public class Queue {
                     aux = aux.getQueueLast();
                 }
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "This user has no projects");
-        }
+        } 
     }
 
     public void orderByDate() {
@@ -128,29 +125,23 @@ public class Queue {
                     aux = aux.getQueueLast();
                 }
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "This user has no projects");
         }
         
     }
     
-    public String getFinishedTasks(){
-        String finishedTasks="";
+    public int getFinishedTasks(){
+        int finishedTasks= 0;
         if(first!=null){
            Node aux=first;
            while(aux!=null){
                if(aux.getTasks().isFinished()){
-                   finishedTasks += aux.getTasks() + "\n";
-                   aux=aux.getNext();
+                   finishedTasks ++;
                }
+               aux = aux.getQueueLast();
            }
             
         }
-        if(finishedTasks.equals("")){
-            return "There are no finished tasks";
-        }else{
-            return finishedTasks;
-        }
+        return finishedTasks;
     }
 
     @Override

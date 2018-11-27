@@ -5,6 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -14,11 +16,13 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import src.App;
 import src.DataModels.Project;
 import src.DataModels.Task;
 
@@ -39,6 +43,12 @@ public class ProjectTasksUI {
     private Scene scene;
     private VBox tasksContainer;
 
+    /**
+     * Creates a Project Tasks Window
+     * 
+     * @param window 
+     * @param project 
+     */
     public ProjectTasksUI(Stage window, Project project) {
         this.window = window;
         this.project = project;
@@ -55,18 +65,30 @@ public class ProjectTasksUI {
         body.setPadding(new Insets(30, 80, 30, 80));
     }
 
+    
     private void setUpBackLink() {
         backLink = new Text("Go back to projects");
         backLink.setFill(Color.web("#4285f4"));
         backLink.setCursor(Cursor.HAND);
         backLink.setOnMouseEntered(e -> backLink.setUnderline(true));
         backLink.setOnMouseExited(e -> backLink.setUnderline(false));
+        backLink.setOnMouseClicked(e -> App.showProjects());
     }
 
     private void setUpHeader() {
         header = new BorderPane();
         title = new Text(project.getName());
         title.setFont(new Font(34));
+        
+        ComboBox filter = new ComboBox();    
+        filter.setValue("Filter");
+        filter.getItems().add("Priority");
+        filter.getItems().add("Date");
+        
+        filter.valueProperty().addListener(e ->{
+            applyFilter((String) filter.getValue());
+        });
+        
         addTaskButton = new Button("Add Task");
 
         addTaskButton.setBackground(new Background(new BackgroundFill(Color.web("#4285f4"), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -75,16 +97,28 @@ public class ProjectTasksUI {
         addTaskButton.setCursor(Cursor.HAND);
         addTaskButton.setTextFill(Color.WHITE);
         addTaskButton.setOnMouseEntered(e -> addTaskButton.setBackground(new Background(new BackgroundFill(Color.web("#67a0fd"), CornerRadii.EMPTY, Insets.EMPTY))));
-        addTaskButton.setOnMouseExited(e -> addTaskButton.setBackground(new Background(new BackgroundFill(Color.web("#4285f4"), CornerRadii.EMPTY, Insets.EMPTY))));
-
+        addTaskButton.setOnMouseExited(e -> addTaskButton.setBackground(new Background(new BackgroundFill(Color.web("#4285f4"), CornerRadii.EMPTY, Insets.EMPTY))));       
         addTaskButton.setOnAction(e -> showCreateTaskForm());
 
         header.setLeft(title);
 
-        VBox btnContainer = new VBox();
+        HBox btnContainer = new HBox();
         btnContainer.setPadding(new Insets(10, 0, 0, 0));
-        btnContainer.getChildren().add(addTaskButton);
+        btnContainer.setSpacing(10);
+        btnContainer.getChildren().addAll(filter, addTaskButton);
         header.setRight(btnContainer);
+    }
+    
+    private void applyFilter(String filter){
+        tasksContainer.getChildren().clear();
+        if(filter.equals("Priority")){
+            project.getTasks().orderByPriority();
+        }else if(filter.equals("Date")){
+            project.getTasks().orderByDate();
+        }
+        for (int t = 0; t < project.getTasks().getLength(); t++) {
+            tasksContainer.getChildren().add(createTaskItem(project.getTasks().getTask(t)));
+        }
     }
 
     private BorderPane createTaskItem(Task task) {
@@ -104,20 +138,29 @@ public class ProjectTasksUI {
         taskDescriptionLabel.setFill(Color.web("#545454"));
 
         Text tasksDateLabel = new Text(task.getDay() + "/" + task.getMonth() + "/" + task.getYear());
+        CheckBox checkBox = new CheckBox();
+        checkBox.setSelected(task.isFinished());        
 
-        VBox nameContainer = new VBox();
-        VBox dateContainer = new VBox();
+        VBox leftContainer = new VBox();
+        HBox rightContainer = new HBox();
 
-        nameContainer.setPadding(new Insets(0, 0, 0, 20));
-        nameContainer.setAlignment(Pos.CENTER_LEFT);
-        nameContainer.getChildren().addAll(taskTitleLabel, taskDescriptionLabel);
+        leftContainer.setPadding(new Insets(0, 0, 0, 20));
+        leftContainer.setAlignment(Pos.CENTER_LEFT);
+        leftContainer.getChildren().addAll(taskTitleLabel, taskDescriptionLabel);
 
-        dateContainer.setAlignment(Pos.CENTER_RIGHT);
-        dateContainer.setPadding(new Insets(0, 20, 0, 0));
-        dateContainer.getChildren().add(tasksDateLabel);
+        rightContainer.setAlignment(Pos.CENTER_RIGHT);
+        rightContainer.setPadding(new Insets(0, 20, 0, 0));
+        rightContainer.setSpacing(10);
+        rightContainer.getChildren().addAll(tasksDateLabel, checkBox);        
 
-        item.setLeft(nameContainer);
-        item.setRight(dateContainer);
+        item.setLeft(leftContainer);
+        item.setRight(rightContainer);
+        
+        item.setOnMouseClicked(e -> {
+            task.setFinished(!task.isFinished());
+            checkBox.setSelected(!checkBox.isSelected());
+        });
+        checkBox.setOnMouseClicked(e -> task.setFinished(!task.isFinished()));
 
         return item;
     }

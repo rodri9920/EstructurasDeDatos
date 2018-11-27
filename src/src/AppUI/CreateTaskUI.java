@@ -100,7 +100,7 @@ public class CreateTaskUI {
 
     public void show() {
         modalWindow = new Stage();
-        modalWindow.setHeight(500);
+        modalWindow.setHeight(525);
         modalWindow.setWidth(500);
         body.getChildren().addAll(title, formContainer, createTaskButton);
         scene = new Scene(body);
