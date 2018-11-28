@@ -69,43 +69,6 @@ public class Queue {
     }
 
     /**
-     * this method is made to remove the task get in the parameter
-     *
-     * @param task
-     * @return a boolean that indicates if the task exists
-     */
-    public boolean remove(Task task) {
-        if (first != null) {//first thing to do is to make sure that the queue is not empty
-            if (first.getTasks().equals(task)) {
-                if (first.getQueueLast() != null) {
-                    first = first.getQueueLast();
-                    length--;//everytime we remove a task, the length must down one 
-                    return true;
-                } else {
-                    length--;
-                    first.setTasks(null);
-                }
-            } else {//if the task to remove is not in first
-                Node aux = first;
-                while (aux.getQueueLast() != null) {//once the node after aux is null is because it reached the end of the queue
-                    if (aux.getQueueLast().getTasks().equals(task)) {
-                        aux.setQueueLast(aux.getQueueLast().getQueueLast());
-                        length--;
-                        return true;
-                        //if the task wanted to be removed is after the aux we delete that node from the queue 
-                    } else {
-                        aux = aux.getQueueLast();
-                    }
-                }
-            }
-
-        } else {
-            return false;//if there are no tasks
-        }
-        return false;//if the method gets here, it is because the task is not in the queue
-    }
-
-    /**
      * this method is made to order the tasks by their priority, in order to
      * make the user able to know which are the most important
      */

@@ -87,7 +87,7 @@ public class ProjectTasksUI {
         removeProjectButton.setOnMouseEntered(e -> removeProjectButton.setUnderline(true));
         removeProjectButton.setOnMouseExited(e -> removeProjectButton.setUnderline(false));
         removeProjectButton.setOnMouseClicked(e -> ModalUI.ask(window, "Are you sure you want to delete this project?", ev -> {
-           /** PUT THE COOL STUFF TO REMOVE THE PROJECT HERE **/
+           App.signedUser.getProjects().remove(project);
                       
            App.showProjects(); //GET BACK TO PROJECTS LIST
         }));

@@ -17,7 +17,7 @@ public class App extends Application {
 
     private static Stage window;
     private static UserList users;
-    private static User signedUser;
+    public static User signedUser;
 
     public static void main(String[] args) {
         launch(args);

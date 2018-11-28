@@ -60,44 +60,6 @@ public class UserList {
         return true;//if the method gets here, it is because the user is able to be added to the list
     }
     
-    
-    /**
-     * this method will be useful to remove users from the list 
-     * @param username
-     * @param password
-     * @return a boolean, which in case of true indicates that the user is in the list
-     */
-    public boolean removeByNameAndPassword(String username, String password) {
-        if (head != null) {//the first thing we do is to verify that our list is not empty
-            boolean removed = false;
-            if (head.getUser().getUsername().equals(username) && head.getUser().getPassword().equals(password)) {
-                head = head.getNext();
-                head.setBack(last);
-                last.setNext(head);
-                removed = true;
-                //if the username and its password are in the head, we turned the variable to true
-            } else {
-                Node aux = head;
-                while (aux.getNext() != head) {//once the aux becomes head again it means that it already finished passing through the list
-                    if (aux.getNext().getUser().getUsername().equals(username) && aux.getNext().getUser().getPassword().equals(password)) {
-                        aux.setNext(aux.getNext().getNext());
-                        aux.getNext().setBack(aux);
-                        removed = true;
-                        break;
-                        //if the aux finds a node that contains the information, the removed variable removes turns true and we break the cicle
-                    } else {
-                        aux = aux.getNext();
-                    }
-                }
-            }
-            return removed;
-        } else {
-            System.out.println("There's no data");
-            return false;
-        }
-    }
-    
-    
     /**
      * this method will be one used when a user wants to signIn in the application
      * @param username
