@@ -36,7 +36,10 @@ public class ProjectTasksUI {
     private Stage window;
     private Project project;
     private VBox body;
+    private BorderPane preHeader;
     private Text backLink;
+    private Text removeProjectButton;
+    
     private BorderPane header;
     private Text title;
     private Button addTaskButton;
@@ -53,7 +56,7 @@ public class ProjectTasksUI {
         this.window = window;
         this.project = project;
         setUpLayout();
-        setUpBackLink();
+        setUpPreHeader();
         setUpHeader();
         setUpTasks();
         buildScene();
@@ -66,13 +69,33 @@ public class ProjectTasksUI {
     }
 
     
-    private void setUpBackLink() {
+    private void setUpPreHeader() {
+        preHeader = new BorderPane();                
+        
         backLink = new Text("Go back to projects");
         backLink.setFill(Color.web("#4285f4"));
         backLink.setCursor(Cursor.HAND);
         backLink.setOnMouseEntered(e -> backLink.setUnderline(true));
         backLink.setOnMouseExited(e -> backLink.setUnderline(false));
         backLink.setOnMouseClicked(e -> App.showProjects());
+        
+        
+        removeProjectButton = new Text("Remove project");
+        
+        removeProjectButton.setFill(Color.web("#4285f4"));
+        removeProjectButton.setCursor(Cursor.HAND);
+        removeProjectButton.setOnMouseEntered(e -> removeProjectButton.setUnderline(true));
+        removeProjectButton.setOnMouseExited(e -> removeProjectButton.setUnderline(false));
+        removeProjectButton.setOnMouseClicked(e -> ModalUI.ask(window, "Are you sure you want to delete this project?", ev -> {
+           /** PUT THE COOL STUFF TO REMOVE THE PROJECT HERE **/
+                      
+           App.showProjects(); //GET BACK TO PROJECTS LIST
+        }));
+        
+        
+        
+        preHeader.setLeft(backLink);
+        preHeader.setRight(removeProjectButton);
     }
 
     private void setUpHeader() {
@@ -176,7 +199,7 @@ public class ProjectTasksUI {
     }
 
     private void buildScene() {
-        body.getChildren().addAll(backLink, header, tasksContainer);
+        body.getChildren().addAll(preHeader, header, tasksContainer);
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
         scrollPane.setFitToHeight(true);
