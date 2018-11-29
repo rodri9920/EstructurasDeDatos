@@ -106,7 +106,7 @@ public class Queue {
                     aux = first;
                     //we must compare to the task next to the aux in order to interchange positions if necessary
                     //the aux must be go back to the first position to pass through the list from the beginning again
-                } else if (aux.getTasks().getYear() == aux.getQueueLast().getTasks().getYear()) {
+                }else if (aux.getTasks().getYear() == aux.getQueueLast().getTasks().getYear()) {
                     if (aux.getTasks().getMonth() > aux.getQueueLast().getTasks().getMonth()) {//if both task have the same year, we must order them by month
                         temp.setTasks(aux.getTasks());
                         aux.setTasks(aux.getQueueLast().getTasks());

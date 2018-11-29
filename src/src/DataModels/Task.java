@@ -8,7 +8,7 @@ public class Task {
     private int priority, month, day, year;
     private boolean finished;
 
-    public Task(String title, String description, int priority, int month, int day, int year) {
+    public Task(String title, String description, int priority, int day, int month, int year) {
         this.title = title;
         this.description = description;
         this.priority = priority;
